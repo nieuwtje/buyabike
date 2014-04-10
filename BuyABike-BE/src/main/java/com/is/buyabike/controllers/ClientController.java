@@ -18,9 +18,9 @@ public class ClientController {
 	private ClientService service;
 	
 	@RequestMapping(value = "create",method = RequestMethod.GET)
-	public @ResponseBody boolean create(@RequestBody Client client){
-		service.create(client);
-		return true;
+	public @ResponseBody String create(){
+		service.create(null);
+		return "<html><body>hoi</body></html>";
 	}
 
 }
