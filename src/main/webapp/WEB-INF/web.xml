@@ -11,7 +11,7 @@
     <init-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            be.g00glen00b.config.AppConfig, be.g00glen00b.config.WebAppConfig, be.g00glen00b.config.WebSocketAppConfig
+            com.is.buyabike.config.AppConfig, com.is.buyabike.config.WebAppConfig, com.is.buyabike.config.WebSocketAppConfig
         </param-value>
     </init-param>
     <async-supported>true</async-supported>
