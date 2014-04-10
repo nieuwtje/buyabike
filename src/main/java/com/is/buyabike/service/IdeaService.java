@@ -1,10 +1,10 @@
-package be.g00glen00b.service;
+package com.is.buyabike.service;
 
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import be.g00glen00b.model.Idea;
+import com.is.buyabike.model.Idea;
 
 public interface IdeaService {
 

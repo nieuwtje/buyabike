@@ -1,4 +1,4 @@
-package be.g00glen00b.config;
+package com.is.buyabike.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

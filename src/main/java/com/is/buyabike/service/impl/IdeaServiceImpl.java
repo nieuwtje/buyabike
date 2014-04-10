@@ -1,4 +1,4 @@
-package be.g00glen00b.service.impl;
+package com.is.buyabike.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import be.g00glen00b.dto.IdeaDto;
-import be.g00glen00b.model.Idea;
-import be.g00glen00b.repository.IdeaRepository;
-import be.g00glen00b.service.IdeaService;
+import com.is.buyabike.dto.IdeaDto;
+import com.is.buyabike.model.Idea;
+import com.is.buyabike.repository.IdeaRepository;
+import com.is.buyabike.service.IdeaService;
 
 @Service
 public class IdeaServiceImpl implements IdeaService {

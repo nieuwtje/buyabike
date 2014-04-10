@@ -1,4 +1,4 @@
-package be.g00glen00b.dto;
+package com.is.buyabike.dto;
 
 import java.io.Serializable;
 

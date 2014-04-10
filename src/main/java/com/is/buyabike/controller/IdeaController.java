@@ -1,4 +1,4 @@
-package be.g00glen00b.controller;
+package com.is.buyabike.controller;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import be.g00glen00b.aspects.NotifyClients;
-import be.g00glen00b.model.Idea;
-import be.g00glen00b.service.IdeaService;
+import com.is.buyabike.aspects.NotifyClients;
+import com.is.buyabike.model.Idea;
+import com.is.buyabike.service.IdeaService;
 
 @Controller
 @RequestMapping("/")

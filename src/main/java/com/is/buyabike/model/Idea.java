@@ -1,4 +1,4 @@
-package be.g00glen00b.model;
+package com.is.buyabike.model;
 
 public class Idea {
     

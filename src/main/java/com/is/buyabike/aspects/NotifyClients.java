@@ -1,4 +1,4 @@
-package be.g00glen00b.aspects;
+package com.is.buyabike.aspects;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

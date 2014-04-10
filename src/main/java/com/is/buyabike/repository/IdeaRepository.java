@@ -1,8 +1,8 @@
-package be.g00glen00b.repository;
+package com.is.buyabike.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import be.g00glen00b.dto.IdeaDto;
+import com.is.buyabike.dto.IdeaDto;
 
 public interface IdeaRepository  extends JpaRepository<IdeaDto, Integer> {
 

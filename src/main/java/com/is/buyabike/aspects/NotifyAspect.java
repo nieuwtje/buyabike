@@ -1,4 +1,4 @@
-package be.g00glen00b.aspects;
+package com.is.buyabike.aspects;
 
 import java.util.Date;
 
@@ -16,10 +16,10 @@ public class NotifyAspect {
 
     private static final String WEBSOCKET_TOPIC = "/topic/notify";
     
-    @Pointcut("@annotation(be.g00glen00b.aspects.NotifyClients)")
+    @Pointcut("@annotation(com.is.buyabike.aspects.NotifyClients)")
     public void notifyPointcut() {}
 
-    @Pointcut("execution(* be.g00glen00b.controller.**.*(..))")
+    @Pointcut("execution(* com.is.buyabike.controller.**.*(..))")
     public void methodPointcut() {}
 
     @After("methodPointcut() && notifyPointcut()") 

@@ -1,4 +1,4 @@
-package be.g00glen00b.config;
+package com.is.buyabike.config;
 
 import javax.sql.DataSource;
 
@@ -21,13 +21,13 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import be.g00glen00b.aspects.NotifyAspect;
-import be.g00glen00b.dto.IdeaDto;
-import be.g00glen00b.model.Idea;
+import com.is.buyabike.aspects.NotifyAspect;
+import com.is.buyabike.dto.IdeaDto;
+import com.is.buyabike.model.Idea;
 
 @Configuration
-@ComponentScan(basePackages = { "be.g00glen00b" }, excludeFilters = { @ComponentScan.Filter(value = Controller.class, type = FilterType.ANNOTATION) })
-@EnableJpaRepositories(basePackages = { "be.g00glen00b.repository" })
+@ComponentScan(basePackages = { "com.is.buyabike" }, excludeFilters = { @ComponentScan.Filter(value = Controller.class, type = FilterType.ANNOTATION) })
+@EnableJpaRepositories(basePackages = { "com.is.buyabike.repository" })
 @EnableTransactionManagement
 @EnableAspectJAutoProxy
 public class AppConfig {
