@@ -3,6 +3,7 @@
   <groupId>org.springframework.samples</groupId>
   <artifactId>BuyABike-BE</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
   
   <properties>
 
@@ -85,5 +86,4 @@
 		</dependency>
 		
 	</dependencies>	
-	<packaging>war</packaging>
 </project>

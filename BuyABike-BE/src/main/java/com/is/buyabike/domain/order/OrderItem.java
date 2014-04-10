@@ -1,5 +1,6 @@
 package com.is.buyabike.domain.order;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -8,6 +9,7 @@ import javax.persistence.OneToOne;
 import com.is.buyabike.domain.Product;
 import com.is.buyabike.validation.NonNegativeNumber;
 
+@Entity
 public class OrderItem {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
