@@ -3,6 +3,7 @@ package com.is.buyabike.domain.order;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 import com.is.buyabike.domain.Product;
 
 @Component
+@Entity
 public class Order {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
