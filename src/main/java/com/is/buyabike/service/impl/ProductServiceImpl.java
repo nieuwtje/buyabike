@@ -42,6 +42,6 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     @Override
     public void deleteProduct(Product product) {
-        repo.delete(product.getId());
+        repo.delete((int) product.getId());
     }
 }
