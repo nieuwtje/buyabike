@@ -1,12 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>be.g00glen00b</groupId>
-	<artifactId>spring-live-updates</artifactId>
+	<groupId>com.is.buyabike</groupId>
+	<artifactId>buyabike</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Spring WebSockets app</name>
-	<url>http://g00glen00b.be/spring-websockets</url>
+	<name>Buy a bike end case</name>
 
 	<properties>
 		<spring.version>4.0.2.RELEASE</spring.version>
@@ -15,7 +14,7 @@
 	</properties>
 
 	<build>
-		<finalName>spring-live-updates</finalName>
+		<finalName>Buy a bike end case</finalName>
 
 		<plugins>
 			<!-- Compilation -->
@@ -127,5 +126,5 @@
 			<version>1.2</version>
 		</dependency>
 	</dependencies>
-	<description>This application demonstrates how you can write real time applications using Spring 4 and AngularJS.</description>
+	<description>This application demonstrates what we have learned during our training.</description>
 </project>
