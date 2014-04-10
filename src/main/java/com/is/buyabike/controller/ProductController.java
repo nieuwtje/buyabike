@@ -17,7 +17,7 @@ import com.is.buyabike.model.Product;
 import com.is.buyabike.service.ProductService;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/product")
 public class ProductController {
 	@Autowired
 	private ProductService service;
