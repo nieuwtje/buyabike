@@ -59,7 +59,11 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.3.0.Final</version>
+		</dependency>
 		
 		<!-- Test Artifacts -->
 		<dependency>
@@ -74,6 +78,6 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-
+		
 	</dependencies>	
 </project>
