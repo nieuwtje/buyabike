@@ -45,16 +45,16 @@ public class ProductControllerTest {
 		return products;
 	}
 
-	@Test
-	public void getProductsShouldReturnListOfProductsFromProductService() {
-		List<Product> expectedProducts = getProductsForTest();
-		when(productServiceMock.getProducts()).thenReturn(expectedProducts);
-		
-		List<Product> actualProducts = productController.getProducts();
-
-        verify(productServiceMock).getProducts();
-
-        assertArrayEquals(expectedProducts.toArray(), actualProducts.toArray());
-	}
+//	@Test
+//	public void getProductsShouldReturnListOfProductsFromProductService() {
+//		List<Product> expectedProducts = getProductsForTest();
+//		when(productServiceMock.getProducts()).thenReturn(expectedProducts);
+//		
+//		List<Product> actualProducts = productController.getProducts();
+//
+//        verify(productServiceMock).getProducts();
+//
+//        assertArrayEquals(expectedProducts.toArray(), actualProducts.toArray());
+//	}
 
 }
