@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
 import com.is.buyabike.validation.NonNegativeNumber;
 import com.is.buyabike.validation.NotEmpty;
@@ -119,6 +117,14 @@ public class Product {
 
 	public void addCategory(Category category) {
 		categories.add(category);
+	}
+
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 
 	@Override
