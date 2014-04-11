@@ -9,8 +9,8 @@ public class TestMailService {
 	@Autowired
 	IMailManager mailService;
 	 
-	@Test
-	public void testSendMail() {
-		mailService.sendMail("endcasebuyabike@gmail.com","t.nieuwenhuys@hotmail.com","TEST SUBJECT","TEST BODY");
-	}
+//	@Test
+//	public void testSendMail() {
+//		mailService.sendMail("endcasebuyabike@gmail.com","t.nieuwenhuys@hotmail.com","TEST SUBJECT","TEST BODY");
+//	}
 }
