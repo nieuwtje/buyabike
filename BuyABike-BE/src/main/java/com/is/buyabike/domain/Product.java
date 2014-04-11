@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.is.buyabike.validation.NonNegativeNumber;
 import com.is.buyabike.validation.NotEmpty;
@@ -36,8 +40,10 @@ public class Product {
 	@NonNegativeNumber
 	private int stock;
 
+	@ManyToOne
 	private Supplier supplier;
 
+	@ManyToMany(mappedBy = "products")
 	private List<Category> categories = new ArrayList<Category>();
 
 	public Product(String name, String description, String imageUrl,
@@ -116,6 +122,7 @@ public class Product {
 	}
 
 	public void addCategory(Category category) {
+		category.addProduct(this);
 		categories.add(category);
 	}
 
