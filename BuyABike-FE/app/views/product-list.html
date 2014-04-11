@@ -1,15 +1,32 @@
-<div class="well" ng-hide='products'>Sorry er zijn helaas geen producten gevonden.</div>
-<div class="col-sm-6 col-md-4" ng-repeat="product in products">
-	<div class="thumbnail">
-		<img data-src="{{product.imageUrl}}" alt="foto of {{product.name}}">
-		<div class="caption">
-			<h3>{{product.name}}</h3>
-			<p>{{product.description}}</p>
-			<p>{{product.resellPrice}}</p>
-			<p>{{product.stock}}</p>
-			<p>
-				<a href="#" class="btn btn-primary" role="button">Details</a>
-			</p>
+<div class="well" ng-show='products'>Sorry er zijn helaas geen producten gevonden.</div>
+
+<div class="well" ng-hide='products'>
+<label>
+  categorie :
+      <select id="categorielist" class="input-medium" ng-model="search.category">
+      <option></option>
+         <option ng-repeat="categorie in categorys">{{categorie.name}}</option>
+      </select>
+</label>
+Naam <input ng-model="search.name"><br>
+</div>
+	
+<div class="col-sm-6 col-md-4" ng-repeat="product in products | filter:search:strict">
+	<div class="panel panel-danger">
+		<!-- Default panel contents -->
+		<div class="panel-heading">{{product.name}}</div>
+		<div class="panel-body flexcolumn">
+			<img src="/images/bikes/bike{{product.id}}.jpg" alt="foto of {{product.name}}"class="productfoto-list">
+			<div>
+				<p>{{product.description}}</p>
+				<p><span>{{product.resellPrice | currency:"&euro; "}}</span></p>
+				<p>{{product.stock}}</p>
+				<p>{{product.category.name}}</p>
+				<p>
+					<a href="#" class="btn btn-primary" role="button">Details</a>
+				</p>
+			</div>
 		</div>
 	</div>
+
 </div>

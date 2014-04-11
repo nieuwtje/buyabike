@@ -88,8 +88,14 @@ body {
 	margin-bottom: 20px;
 }
 
+.flexcolumn {
+	display: flex;
+	flex-direction: column;
+}
+
 .flexrow {
 	display: flex;
+	flex-direction: row;
 }
 
 .pull-center {
@@ -108,15 +114,22 @@ body {
 	margin-right: 10px;
 }
 
-.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus
+.nav-pills>li.active>a,.nav-pills>li.active>a:hover,.nav-pills>li.active>a:focus
 	{
 	background-color: #E93434;
 	color: white;
 }
-.nav-pills > li > a:hover{
+
+.nav-pills>li>a:hover {
 	background-color: #E5E5E5;
 }
 
 .nav-pills>li>a {
 	color: #E93434;
+}
+.productfoto-list{
+	margin-bottom:5px;
+}
+img{
+	max-width: 100%;
 }
