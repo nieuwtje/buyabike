@@ -27,6 +27,9 @@
 		<!-- Test -->
 		<junit.version>4.11</junit.version>
 
+		<!-- Mocking -->
+		<powermock.version>1.5.4</powermock.version>
+
 	</properties>
 
 	<dependencies>
@@ -129,9 +132,16 @@
 			<version>1.4</version>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+			<version>1.0.0.RELEASE</version>
+		</dependency>
+
+		<!-- Mocking -->
+		<dependency>
 			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>1.9.0</version>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.5</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -139,12 +149,31 @@
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
 			<version>1.1.2</version>
-		</dependency>
-
-		<dependency>
+			</dependency>
+			<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
+			</dependency>
+			<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-module-junit4</artifactId>
+			<version>${powermock.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		
+			<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito</artifactId>
+			<version>${powermock.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<version>3.2</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 	<repositories>
