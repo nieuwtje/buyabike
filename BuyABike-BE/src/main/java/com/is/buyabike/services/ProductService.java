@@ -3,25 +3,37 @@ package com.is.buyabike.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.is.buyabike.dao.ProductDao;
+import com.is.buyabike.domain.Address;
+import com.is.buyabike.domain.Category;
 import com.is.buyabike.domain.Product;
+import com.is.buyabike.domain.Supplier;
 
 @Service
 public class ProductService {
-
-	private List<Product> productTestData(){
-		List<Product> products = new ArrayList<Product>();
-		for (int i = 0; i < 15; i++) {
-			int image = 500 + i;
-			int stock = i;
-			Product product = new Product("Fiets " + i,"Beschrijving " + i,"bike"+image,200.00,300.00,stock) ;
-			products.add(product);
-		}
-		return products;
-	}
+	@Autowired
+	private ProductDao productDao;
 
 	public List<Product> getProducts(){
-		return productTestData();
+		return productDao.findAll();
+	}
+	
+	public Product getProductById(long id){
+		return productDao.findWithId(id);
+	}
+	
+	public Product updateProduct(Product product){
+		return productDao.update(product);
+	}
+	
+	public void removeProduct(Product product){
+		productDao.delete(product);
+	}
+	
+	public void saveProduct(Product product){
+		productDao.persist(product);
 	}
 }

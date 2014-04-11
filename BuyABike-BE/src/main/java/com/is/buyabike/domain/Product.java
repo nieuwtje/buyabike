@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 
-import com.is.buyabike.validation.NonNegativeNumber;
-import com.is.buyabike.validation.NotEmpty;
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 @Entity
 public class Product {
@@ -29,21 +31,22 @@ public class Product {
 	@NotEmpty
 	private String imageUrl;
 
-	@NonNegativeNumber
+	@Min(0)
 	private double purchasePrice;
 
-	@NonNegativeNumber
+	@Min(0)
 	private double resellPrice;
 
-	@NonNegativeNumber
+	@Min(0)
 	private int stock;
 
+	@ManyToOne
 	private Supplier supplier;
 
-	private List<Category> categories = new ArrayList<Category>();
+	@ManyToOne
+	private Category category;
 
-	public Product(String name, String description, String imageUrl,
-			double purchasePrice, double resellPrice, int stock) {
+	public Product(String name, String description, String imageUrl, double purchasePrice, double resellPrice, int stock) {
 		super();
 		this.name = name;
 		this.description = description;
@@ -117,8 +120,14 @@ public class Product {
 		return id;
 	}
 
-	public void addCategory(Category category) {
-		categories.add(category);
+
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	@Override

@@ -8,6 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.stereotype.Component;
 
@@ -15,16 +21,32 @@ import com.is.buyabike.domain.Product;
 
 @Component
 @Entity
+@XmlRootElement(name = "order")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Order {
+	public enum OrderStatus {
+		RECEIVED,
+		ONROUTE,
+		DELIVERED,
+		CANCELED
+	}
+	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@OneToMany
+	@XmlElementWrapper(name = "items")
+	@XmlElementRefs({
+        @XmlElementRef(name = "item", type = OrderItem.class)
+	})
 	private List<OrderItem> items;
+	
+	private OrderStatus status;
 	
 	public Order() {
 		items = new ArrayList<OrderItem>();
+		status = OrderStatus.RECEIVED;
 	}
 	
 	public List<OrderItem> getItems() {
@@ -39,7 +61,10 @@ public class Order {
 			}
 		}
 		
-		OrderItem item = new OrderItem(product, 1);
+		addOrderItem(new OrderItem(product, 1));
+	}
+	
+	public void addOrderItem(OrderItem item) {
 		items.add(item);
 	}
 	
@@ -77,5 +102,13 @@ public class Order {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public OrderStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(OrderStatus status) {
+		this.status = status;
 	}
 }

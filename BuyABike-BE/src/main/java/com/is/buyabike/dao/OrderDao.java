@@ -13,9 +13,9 @@ import com.is.buyabike.domain.order.Order;
 
 @Repository
 @Transactional
-public class OrderDAO {
+public class OrderDao {
 	@PersistenceContext
-	EntityManager em;
+	private EntityManager em;
 	
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
@@ -42,12 +42,15 @@ public class OrderDAO {
 	}
 
 	@Transactional
-	public void removeOrder(Order order) {
+	public Order removeOrder(Order order)  {
+		Order deleted = em.find(Order.class, order.getId());
 		em.remove(order);
+		
+		return deleted;
 	}
 
 	@Transactional
-	public void removeOrder(long id) {
-		em.remove(em.find(Order.class, id));
+	public Order removeOrder(long id) {
+		return removeOrder(em.find(Order.class, id));
 	}
 }
