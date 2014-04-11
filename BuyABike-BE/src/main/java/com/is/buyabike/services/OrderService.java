@@ -20,4 +20,16 @@ public class OrderService {
 	public List<Order> listOrders() {
 		return dao.listOrders();
 	}
+
+	public Order findOrderById(long id) {
+		return dao.findOrderById(id);
+	}
+
+	public void removeOrder(Order order) {
+		dao.removeOrder(order);
+	}
+
+	public void removeOrder(long id) {
+		dao.removeOrder(id);
+	}
 }
