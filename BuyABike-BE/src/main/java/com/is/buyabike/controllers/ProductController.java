@@ -18,6 +18,7 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public List<Product> getProducts(){	
