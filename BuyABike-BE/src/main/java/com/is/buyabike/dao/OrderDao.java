@@ -13,7 +13,7 @@ import com.is.buyabike.domain.order.Order;
 
 @Repository
 @Transactional
-public class OrderDAO {
+public class OrderDao {
 	@PersistenceContext
 	EntityManager em;
 	

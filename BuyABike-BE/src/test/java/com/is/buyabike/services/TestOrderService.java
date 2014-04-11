@@ -16,21 +16,21 @@ import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import com.is.buyabike.dao.OrderDAO;
+import com.is.buyabike.dao.OrderDao;
 import com.is.buyabike.domain.Product;
 import com.is.buyabike.domain.order.Order;
 import com.is.buyabike.domain.order.OrderItem;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(OrderDAO.class)
+@PrepareForTest(OrderDao.class)
 public class TestOrderService {
 	private OrderService service;
-	private OrderDAO dao;
+	private OrderDao dao;
 	
 	@Before
 	public void before() throws Throwable {
 		service = new OrderService();
-		dao = createMock(OrderDAO.class);
+		dao = createMock(OrderDao.class);
 		setInternalState(service, dao);
 	}
 	

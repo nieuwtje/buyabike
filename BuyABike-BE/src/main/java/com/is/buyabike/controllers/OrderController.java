@@ -26,7 +26,7 @@ public class OrderController {
 		service.create(order);
 	}
 	
-	// TODO - werkt niet???
+	// TODO - doesn't work???
 	@RequestMapping(method = RequestMethod.GET, headers = "accept=application/xml")
 	public @ResponseBody List<Order> getOrdersAsXML() {
 //		final List<Order> list = new ArrayList<Order>();
