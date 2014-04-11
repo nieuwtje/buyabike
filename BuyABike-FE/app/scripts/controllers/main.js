@@ -1,7 +1,6 @@
-'use strict';
 
-angular.module('buyAbikeFeApp')
-  .controller('MainCtrl', function ($scope) {
+var mainControllers = angular.module('mainControllers', ['ngRoute']);
+mainControllers.controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

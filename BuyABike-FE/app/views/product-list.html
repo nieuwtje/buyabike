@@ -1,0 +1,15 @@
+<div class="well" ng-hide='products'>Sorry er zijn helaas geen producten gevonden.</div>
+<div class="col-sm-6 col-md-4" ng-repeat="product in products">
+	<div class="thumbnail">
+		<img data-src="{{product.imageUrl}}" alt="foto of {{product.name}}">
+		<div class="caption">
+			<h3>{{product.name}}</h3>
+			<p>{{product.description}}</p>
+			<p>{{product.resellPrice}}</p>
+			<p>{{product.stock}}</p>
+			<p>
+				<a href="#" class="btn btn-primary" role="button">Details</a>
+			</p>
+		</div>
+	</div>
+</div>

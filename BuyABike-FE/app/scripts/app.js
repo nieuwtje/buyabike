@@ -1,18 +1,16 @@
 'use strict';
+var buyabikefeapp = angular.module('buyAbikeFeApp',
+		[ 'ngCookies', 'ngResource', 'ngSanitize', 'ngRoute','mainControllers','menuControllers','productControllers', 'productServices' ]);
 
-angular.module('buyAbikeFeApp', [
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'ngRoute'
-])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+buyabikefeapp.config(
+		function($routeProvider) {
+			$routeProvider.when('/', {
+				templateUrl : 'views/main.html',
+				controller : 'MainCtrl'
+			}).when('/products', {
+				templateUrl : 'views/product-list.html',
+				controller : 'ProductListCtrl'
+			}).otherwise({
+				redirectTo : '/'
+			});
+		});
