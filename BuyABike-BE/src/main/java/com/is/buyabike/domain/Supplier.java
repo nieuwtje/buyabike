@@ -12,6 +12,10 @@ public class Supplier {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	public long getId() {
+		return id;
+	}
+
 	private String name;
 	@Embedded
 	private Address address;

@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 
 @Entity
 public class Category {
@@ -17,14 +21,13 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	public long getId() {
+		return id;
+	}
 	private String name;
 
 	private String description;
 	
-	@ManyToMany
-	@JoinTable(name = "Category_Products")
-	private List<Product> products = new ArrayList<Product>();
-
 	public Category(String name, String description) {
 		super();
 		this.name = name;
@@ -51,14 +54,4 @@ public class Category {
 		this.description = description;
 	}
 
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
-	public void addProduct(Product product){
-		this.products.add(product);
-	}
 }

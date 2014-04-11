@@ -18,7 +18,7 @@ public class ProductDao {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	@Transactional(readOnly=true)
+	@Transactional
 	public Product findWithId(long id) {
 		return entityManager.find(Product.class, id);
 	}
@@ -28,10 +28,11 @@ public class ProductDao {
 		entityManager.persist(product);
 	}
 
-	@Transactional(readOnly=true)
+	@Transactional
 	public List<Product> findAll(){
 		TypedQuery<Product> q = entityManager.createQuery("SELECT p FROM Product p", Product.class);
-		return q.getResultList();
+		List<Product> products = q.getResultList();
+return products;
 	}
 
 	@Transactional
