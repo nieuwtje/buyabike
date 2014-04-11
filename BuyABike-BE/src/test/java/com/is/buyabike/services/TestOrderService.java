@@ -28,14 +28,14 @@ public class TestOrderService {
 	private OrderDao dao;
 	
 	@Before
-	public void before() throws Throwable {
+	public void setUp() {
 		service = new OrderService();
 		dao = createMock(OrderDao.class);
 		setInternalState(service, dao);
 	}
 	
 	@Test
-	public void verifyThatTheServiceWillCallTheDAO() {
+	public void verifyThatTheServiceWillCallListOrdersFromTheDAO() {
 		final List<Order> list = new ArrayList<Order>();
 		Order order1 = new Order();
 		Product p1 = new Product("test", "test product", "url.jpg", 10.50, 10.50, 5);
@@ -49,10 +49,53 @@ public class TestOrderService {
 		order1.addOrderItem(item3);
 		list.add(order1);
 		
-		expect(dao.listOrders()).andReturn(list);
-		
+		expect(dao.listOrders()).andReturn(list);	
 		replay(dao);
 		
 		assertThat(service.listOrders().size(), is(1));
+	}
+	
+	@Test
+	public void verifyThatTheServiceWillCallSaveOrderFromTheDAO() {
+		Order order1 = new Order();
+		order1.setId(1);
+		
+		expect(dao.saveOrder(order1)).andReturn(order1);
+		replay(dao);
+		
+		assertThat(service.create(order1).getId(), is(order1.getId()));
+	}
+	
+	@Test
+	public void verifyThatTheServiceWillCallRemoveFromTheDAO() {
+		Order order1 = new Order();
+		order1.setId(1);
+		
+		expect(dao.removeOrder(order1)).andReturn(order1);
+		replay(dao);
+		
+		assertThat(service.remove(order1).getId(), is(order1.getId()));
+	}
+	
+	@Test
+	public void verifyThatTheServiceWillCallRemoveByIdFromTheDAO() {
+		Order order1 = new Order();
+		order1.setId(1);
+		
+		expect(dao.removeOrder(order1.getId())).andReturn(order1);
+		replay(dao);
+		
+		assertThat(service.remove(order1.getId()).getId(), is(order1.getId()));
+	}
+	
+	@Test
+	public void verifyThatTheServiceWillCallFindFromTheDAO() {
+		Order order1 = new Order();
+		order1.setId(1);
+		
+		expect(dao.findOrderById(order1.getId())).andReturn(order1);
+		replay(dao);
+		
+		assertThat(service.find(order1.getId()).getId(), is(order1.getId()));
 	}
 }

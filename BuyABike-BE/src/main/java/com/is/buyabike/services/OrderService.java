@@ -13,23 +13,23 @@ public class OrderService {
 	@Autowired
 	private OrderDao dao;
 	
-	public void create(Order order) {
-		dao.saveOrder(order);
+	public Order create(Order order) {
+		return dao.saveOrder(order);
 	}
 
 	public List<Order> listOrders() {
 		return dao.listOrders();
 	}
 
-	public Order findOrderById(long id) {
+	public Order find(long id) {
 		return dao.findOrderById(id);
 	}
 
-	public void removeOrder(Order order) {
-		dao.removeOrder(order);
+	public Order remove(Order order) {
+		return dao.removeOrder(order);
 	}
 
-	public void removeOrder(long id) {
-		dao.removeOrder(id);
+	public Order remove(long id) {
+		return dao.removeOrder(id);
 	}
 }

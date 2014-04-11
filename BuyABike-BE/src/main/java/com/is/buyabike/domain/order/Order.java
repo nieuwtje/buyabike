@@ -24,6 +24,13 @@ import com.is.buyabike.domain.Product;
 @XmlRootElement(name = "order")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Order {
+	public enum OrderStatus {
+		RECEIVED,
+		ONROUTE,
+		DELIVERED,
+		CANCELED
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -35,8 +42,11 @@ public class Order {
 	})
 	private List<OrderItem> items;
 	
+	private OrderStatus status;
+	
 	public Order() {
 		items = new ArrayList<OrderItem>();
+		status = OrderStatus.RECEIVED;
 	}
 	
 	public List<OrderItem> getItems() {
@@ -92,5 +102,13 @@ public class Order {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public OrderStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(OrderStatus status) {
+		this.status = status;
 	}
 }
