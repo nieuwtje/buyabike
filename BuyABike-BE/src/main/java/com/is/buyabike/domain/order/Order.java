@@ -39,7 +39,10 @@ public class Order {
 			}
 		}
 		
-		OrderItem item = new OrderItem(product, 1);
+		addOrderItem(new OrderItem(product, 1));
+	}
+	
+	public void addOrderItem(OrderItem item) {
 		items.add(item);
 	}
 	
