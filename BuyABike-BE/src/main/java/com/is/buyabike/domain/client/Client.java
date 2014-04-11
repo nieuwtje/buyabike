@@ -1,10 +1,17 @@
-package com.is.buyabike.domain;
+package com.is.buyabike.domain.client;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.is.buyabike.domain.Address;
+import com.is.buyabike.domain.order.Order;
 
 @Entity
 public class Client {
@@ -13,13 +20,18 @@ public class Client {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	public long getId() {
+		return id;
+	}
+
 	private String firstName;
 	private String lastName;
 	
 	@Embedded
 	private Address address;
 	
-	private String password;
+	@OneToMany
+	private List<Order> orders = new ArrayList<Order>();
 	public Client(){
 		
 	}
@@ -30,7 +42,6 @@ public class Client {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
-		this.password = password;
 	}
 
 	public String getFirstName() {
@@ -57,13 +68,18 @@ public class Client {
 		this.address = address;
 	}
 
-	public String getPassword() {
-		return password;
+	public List<Order> getOrders() {
+		return orders;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
+	
+	public void addOrder(Order order){
+		orders.add(order);
+	}
+
 	
 
 }
