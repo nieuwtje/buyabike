@@ -1,37 +1,32 @@
 package com.is.buyabike.services;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.powermock.reflect.Whitebox.setInternalState;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import junitx.util.PrivateAccessor;
+
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.is.buyabike.dao.OrderDao;
 import com.is.buyabike.domain.Product;
 import com.is.buyabike.domain.order.Order;
 import com.is.buyabike.domain.order.OrderItem;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(OrderDao.class)
 public class TestOrderService {
 	private OrderService service;
 	private OrderDao dao;
 	
 	@Before
-	public void setUp() {
+	public void setUp() throws NoSuchFieldException {
 		service = new OrderService();
-		dao = createMock(OrderDao.class);
-		setInternalState(service, dao);
+		dao = mock(OrderDao.class);
+		PrivateAccessor.setField(service, "dao", dao);
 	}
 	
 	@Test
@@ -49,8 +44,7 @@ public class TestOrderService {
 		order1.addOrderItem(item3);
 		list.add(order1);
 		
-		expect(dao.listOrders()).andReturn(list);	
-		replay(dao);
+		when(dao.listOrders()).thenReturn(list);	
 		
 		assertThat(service.listOrders().size(), is(1));
 	}
@@ -60,8 +54,7 @@ public class TestOrderService {
 		Order order1 = new Order();
 		order1.setId(1);
 		
-		expect(dao.saveOrder(order1)).andReturn(order1);
-		replay(dao);
+		when(dao.saveOrder(order1)).thenReturn(order1);
 		
 		assertThat(service.create(order1).getId(), is(order1.getId()));
 	}
@@ -71,8 +64,7 @@ public class TestOrderService {
 		Order order1 = new Order();
 		order1.setId(1);
 		
-		expect(dao.removeOrder(order1)).andReturn(order1);
-		replay(dao);
+		when(dao.removeOrder(order1)).thenReturn(order1);
 		
 		assertThat(service.remove(order1).getId(), is(order1.getId()));
 	}
@@ -82,8 +74,7 @@ public class TestOrderService {
 		Order order1 = new Order();
 		order1.setId(1);
 		
-		expect(dao.removeOrder(order1.getId())).andReturn(order1);
-		replay(dao);
+		when(dao.removeOrder(order1.getId())).thenReturn(order1);
 		
 		assertThat(service.remove(order1.getId()).getId(), is(order1.getId()));
 	}
@@ -93,8 +84,7 @@ public class TestOrderService {
 		Order order1 = new Order();
 		order1.setId(1);
 		
-		expect(dao.findOrderById(order1.getId())).andReturn(order1);
-		replay(dao);
+		when(dao.findOrderById(order1.getId())).thenReturn(order1);
 		
 		assertThat(service.find(order1.getId()).getId(), is(order1.getId()));
 	}
