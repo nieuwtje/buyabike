@@ -7,7 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 
-import com.is.buyabike.validation.NotEmpty;
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 
 

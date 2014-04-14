@@ -5,12 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Min;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.is.buyabike.domain.Product;
-import com.is.buyabike.validation.NonNegativeNumber;
 
 @Entity
 @XmlRootElement(name = "item")
@@ -23,7 +23,7 @@ public class OrderItem {
 	@OneToOne
 	private Product product;
 	
-	@NonNegativeNumber
+	@Min(0)
 	private int amount;
 	
 	public OrderItem() {
