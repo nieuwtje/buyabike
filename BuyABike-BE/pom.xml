@@ -27,8 +27,6 @@
 		<!-- Test -->
 		<junit.version>4.11</junit.version>
 
-		<!-- Mocking -->
-		<powermock.version>1.5.4</powermock.version>
 
 	</properties>
 
