@@ -151,10 +151,11 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Mail -->
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring</artifactId>
-			<version>2.5.4</version>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring-framework.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.mail</groupId>
