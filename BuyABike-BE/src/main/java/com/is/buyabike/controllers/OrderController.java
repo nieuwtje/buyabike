@@ -1,6 +1,5 @@
 package com.is.buyabike.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.is.buyabike.domain.Product;
 import com.is.buyabike.domain.order.Order;
-import com.is.buyabike.domain.order.OrderItem;
 import com.is.buyabike.services.OrderService;
 
 @Controller
@@ -27,9 +24,8 @@ public class OrderController {
 		service.create(order);
 	}
 	
-	// TODO - doesn't work???
-	@RequestMapping(method = RequestMethod.GET, headers = "accept=application/xml")
-	public @ResponseBody List<Order> getOrdersAsXML() {
+	@RequestMapping(method = RequestMethod.GET, headers = "accept=application/json")
+	public @ResponseBody List<Order> getOrdersAsJSON() {
 //		final List<Order> list = new ArrayList<Order>();
 //		Order order1 = new Order();
 //		Product p1 = new Product("test", "test product", "url.jpg", 10.50, 10.50, 5);
@@ -46,11 +42,6 @@ public class OrderController {
 //		return list;
 		
 		return service.listOrders();
-	}
-	
-	@RequestMapping(method = RequestMethod.GET, headers = "accept=application/json")
-	public @ResponseBody List<Order> getOrdersAsJSON() {
-		return getOrdersAsXML();
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, params = {"id"})
