@@ -6,15 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import com.is.buyabike.domain.Product;
 
 @Entity
-@XmlRootElement(name = "item")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class OrderItem {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

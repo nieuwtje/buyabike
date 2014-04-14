@@ -3,26 +3,21 @@ package com.is.buyabike.domain.order;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-
-import org.springframework.stereotype.Component;
+import javax.persistence.Table;
 
 import com.is.buyabike.domain.Product;
 
-@Component
 @Entity
-@XmlRootElement(name = "order")
-@XmlAccessorType(XmlAccessType.FIELD)
+@Table(name="clientorder")
 public class Order {
 	public enum OrderStatus {
 		RECEIVED,
@@ -35,22 +30,22 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@OneToMany
-	@XmlElementWrapper(name = "items")
-	@XmlElementRefs({
-        @XmlElementRef(name = "item", type = OrderItem.class)
-	})
-	private List<OrderItem> items;
+	@OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+	private List<OrderItem> items = new ArrayList<OrderItem>();
 	
-	private OrderStatus status;
+	@Enumerated(EnumType.ORDINAL)
+	private OrderStatus status = OrderStatus.RECEIVED;
 	
 	public Order() {
-		items = new ArrayList<OrderItem>();
-		status = OrderStatus.RECEIVED;
+		super();
 	}
 	
 	public List<OrderItem> getItems() {
 		return items;
+	}
+	
+	public void setItems(List<OrderItem> items) {
+		this.items = items;
 	}
 	
 	public void addProduct(Product product) {
@@ -61,6 +56,7 @@ public class Order {
 			}
 		}
 		
+		System.out.println("Added product " + product.getDescription());
 		addOrderItem(new OrderItem(product, 1));
 	}
 	

@@ -21,26 +21,11 @@ public class OrderController {
 	
 	@RequestMapping(method = RequestMethod.PUT)
 	public void submitOrder(@RequestBody Order order) {
-		service.create(order);
+		service.persist(order);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, headers = "accept=application/json")
 	public @ResponseBody List<Order> getOrdersAsJSON() {
-//		final List<Order> list = new ArrayList<Order>();
-//		Order order1 = new Order();
-//		Product p1 = new Product("test", "test product", "url.jpg", 10.50, 10.50, 5);
-//		Product p2 = new Product("test2", "test product2", "url.jpg", 12.50, 12.50, 20);
-//		Product p3 = new Product("test3", "test product3", "url.jpg", 8.50, 8.50, 15);
-//		OrderItem item1 = new OrderItem(p1, 5);
-//		order1.addOrderItem(item1);
-//		OrderItem item2 = new OrderItem(p2, 2);
-//		order1.addOrderItem(item2);
-//		OrderItem item3 = new OrderItem(p3, 3);
-//		order1.addOrderItem(item3);
-//		list.add(order1);
-//		
-//		return list;
-		
 		return service.listOrders();
 	}
 	

@@ -32,6 +32,7 @@ public class Client {
 	
 	@OneToMany
 	private List<Order> orders = new ArrayList<Order>();
+	
 	public Client(){
 		
 	}

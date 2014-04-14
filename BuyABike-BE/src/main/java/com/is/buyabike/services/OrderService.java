@@ -13,8 +13,8 @@ public class OrderService {
 	@Autowired
 	private OrderDao dao;
 	
-	public Order create(Order order) {
-		return dao.saveOrder(order);
+	public Order persist(Order order) {
+		return dao.persist(order);
 	}
 
 	public List<Order> listOrders() {

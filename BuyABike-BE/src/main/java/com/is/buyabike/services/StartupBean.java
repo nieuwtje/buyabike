@@ -4,7 +4,6 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.InitBinder;
 
 import com.is.buyabike.dao.CategoryDao;
 import com.is.buyabike.dao.ProductDao;
@@ -13,6 +12,8 @@ import com.is.buyabike.domain.Address;
 import com.is.buyabike.domain.Category;
 import com.is.buyabike.domain.Product;
 import com.is.buyabike.domain.Supplier;
+import com.is.buyabike.domain.order.Order;
+import com.is.buyabike.domain.order.Order.OrderStatus;
 
 @Component
 public class StartupBean {
@@ -23,6 +24,8 @@ public class StartupBean {
 	private CategoryDao categoryDao;
 	@Autowired
 	private SupplierDao supplierDao;
+	@Autowired
+	private OrderService orderService;	
 	
 	@PostConstruct
 	public void init(){
@@ -50,5 +53,10 @@ public class StartupBean {
 		productDao.persist(product2);
 		productDao.persist(product3);
 		
+		Order order = new Order();
+		order.addProduct(product1);
+		order.setStatus(OrderStatus.RECEIVED);
+		
+		orderService.persist(order);
 	}
 }

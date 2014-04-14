@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.is.buyabike.domain.order.Order;
+import com.is.buyabike.domain.order.OrderItem;
 
 @Repository
 @Transactional
@@ -25,13 +26,8 @@ public class OrderDao {
 	}
 
 	@Transactional
-	public Order saveOrder(Order order) {
-		if (findOrderById(order.getId()) != null) {
-			em.merge(order);
-		}
-		else {
-			em.persist(order);
-		}
+	public Order persist(Order order) {
+		em.persist(order);
 		
 		return findOrderById(order.getId());
 	}

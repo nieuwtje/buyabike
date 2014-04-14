@@ -54,9 +54,9 @@ public class TestOrderService {
 		Order order1 = new Order();
 		order1.setId(1);
 		
-		when(dao.saveOrder(order1)).thenReturn(order1);
+		when(dao.persist(order1)).thenReturn(order1);
 		
-		assertThat(service.create(order1).getId(), is(order1.getId()));
+		assertThat(service.persist(order1).getId(), is(order1.getId()));
 	}
 	
 	@Test
