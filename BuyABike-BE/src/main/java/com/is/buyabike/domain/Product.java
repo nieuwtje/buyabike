@@ -85,6 +85,9 @@ public class Product {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
+	public void incrementStock(int amount){
+		this.stock = this.stock + amount;
+	}
 
 	public String getName() {
 		return name;
