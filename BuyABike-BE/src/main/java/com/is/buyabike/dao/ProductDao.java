@@ -46,6 +46,7 @@ public class ProductDao {
 		return entityManager.merge(product);
 	}
 
+	@Transactional
 	public List<Product> findAllWithCategories() {
 		TypedQuery<Product> q = entityManager.createQuery("SELECT DISTINCT p FROM Product p JOIN FETCH p.categories", Product.class);
 		List<Product> products = q.getResultList();
