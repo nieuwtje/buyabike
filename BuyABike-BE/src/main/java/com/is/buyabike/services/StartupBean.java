@@ -38,20 +38,26 @@ public class StartupBean {
 		
 		Supplier supplier = new Supplier("Fietsfabrikant",new Address("Street","2","City","State","Country"),"website","phone");
 		
-		supplierDao.persist(supplier);
-		categoryDao.persist(category1);
-		categoryDao.persist(category2);
+		supplierDao.persist(supplier);		
+		
 		
 		product1.setSupplier(supplier);
 		product2.setSupplier(supplier);
 		product3.setSupplier(supplier);
-		product1.setCategory(category1);
-		product2.setCategory(category2);
-		product3.setCategory(category1);
 		
 		productDao.persist(product1);
 		productDao.persist(product2);
 		productDao.persist(product3);
+		
+		category1.addProduct(product1);
+		category2.addProduct(product1);
+		category1.addProduct(product2);
+		category2.addProduct(product2);
+		category1.addProduct(product3);
+		category2.addProduct(product3);
+		
+		categoryDao.persist(category1);
+		categoryDao.persist(category2);
 		
 		Order order = new Order();
 		order.addProduct(product1);

@@ -1,13 +1,19 @@
 package com.is.buyabike.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 
@@ -40,8 +46,8 @@ public class Product {
 	@ManyToOne
 	private Supplier supplier;
 
-	@ManyToOne
-	private Category category;
+	@ManyToMany(mappedBy="products")
+	private List<Category> categories = new ArrayList<Category>();
 
 	public Product(String name, String description, String imageUrl, double purchasePrice, double resellPrice, int stock) {
 		super();
@@ -117,14 +123,17 @@ public class Product {
 		return id;
 	}
 
-
-
-	public Category getCategory() {
-		return category;
+	public List<Category> getCategories() {
+		return categories;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
+	}
+	
+	public void addCategory(Category category){
+		category.addProduct(this);
+		this.categories.add(category);
 	}
 
 	@Override

@@ -11,7 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 
 @Entity
@@ -19,14 +20,11 @@ public class Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-
-	public long getId() {
-		return id;
-	}
+	private long id;	
 	private String name;
-
 	private String description;
+	@ManyToMany
+	private List<Product> products = new ArrayList<Product>();
 	
 	public Category(String name, String description) {
 		super();
@@ -36,6 +34,10 @@ public class Category {
 
 	public Category() {
 		super();
+	}
+	
+	public long getId() {
+		return id;
 	}
 
 	public String getName() {
@@ -52,6 +54,17 @@ public class Category {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+	public void addProduct(Product product){
+		this.products.add(product);
 	}
 
 }

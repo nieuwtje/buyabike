@@ -30,7 +30,7 @@ public class CategoryDao {
 
 	@Transactional(readOnly=true)
 	public List<Category> findAll(){
-		TypedQuery<Category> q = entityManager.createQuery("SELECT p FROM Category p", Category.class);
+		TypedQuery<Category> q = entityManager.createQuery("SELECT c FROM Category c", Category.class);
 		return q.getResultList();
 	}
 
@@ -43,6 +43,11 @@ public class CategoryDao {
 	@Transactional
 	public Category update(Category category){
 		return entityManager.merge(category);
+	}
+
+	public List<Category> findAllWithProducts() {
+		TypedQuery<Category> q = entityManager.createQuery("SELECT DISTINCT c FROM Category c LEFT JOIN FETCH c.products", Category.class);
+		return q.getResultList();
 	}
 
 }

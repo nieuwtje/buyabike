@@ -32,7 +32,7 @@ public class ProductDao {
 	public List<Product> findAll(){
 		TypedQuery<Product> q = entityManager.createQuery("SELECT p FROM Product p", Product.class);
 		List<Product> products = q.getResultList();
-return products;
+		return products;
 	}
 
 	@Transactional
@@ -44,6 +44,12 @@ return products;
 	@Transactional
 	public Product update(Product product){
 		return entityManager.merge(product);
+	}
+
+	public List<Product> findAllWithCategories() {
+		TypedQuery<Product> q = entityManager.createQuery("SELECT DISTINCT p FROM Product p JOIN FETCH p.categories", Product.class);
+		List<Product> products = q.getResultList();
+		return products;
 	}
 
 }

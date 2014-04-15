@@ -10,7 +10,16 @@
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
-	<annotation-driven />
+	<annotation-driven>
+        <message-converters>
+            <!-- Use the HibernateAware mapper instead of the default -->
+            <beans:bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <beans:property name="objectMapper">
+                    <beans:bean class="com.is.buyabike.jackson.HibernateAwareObjectMapper" />
+                </beans:property>
+            </beans:bean>
+        </message-converters>
+	</annotation-driven>
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
@@ -22,6 +31,6 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.is.buyabike.controllers" />
-	
+	<context:component-scan base-package="com.is.buyabike.mail" />
 	<context:component-scan base-package="com.is.buyabike.services" />
 </beans:beans>
