@@ -20,7 +20,9 @@ public class ProductDao {
 
 	@Transactional
 	public Product findWithId(long id) {
-		return entityManager.find(Product.class, id);
+		TypedQuery<Product> q = entityManager.createQuery("SELECT p FROM Product p JOIN FETCH p.categories WHERE p.id = :id", Product.class);
+		q.setParameter("id", id);
+		return q.getSingleResult();
 	}
 
 	@Transactional
@@ -30,14 +32,14 @@ public class ProductDao {
 
 	@Transactional
 	public List<Product> findAll(){
-		TypedQuery<Product> q = entityManager.createQuery("SELECT p FROM Product p", Product.class);
+		TypedQuery<Product> q = entityManager.createQuery("SELECT DISTINCT p FROM Product p JOIN FETCH p.categories", Product.class);
 		List<Product> products = q.getResultList();
 		return products;
 	}
 
 	@Transactional
 	public void delete(Product product){
-		Product productToRemove = this.findWithId(product.getId());
+		Product productToRemove = entityManager.find(Product.class, product.getId());
 		entityManager.remove(productToRemove);
 	}
 
@@ -46,11 +48,5 @@ public class ProductDao {
 		return entityManager.merge(product);
 	}
 
-	@Transactional
-	public List<Product> findAllWithCategories() {
-		TypedQuery<Product> q = entityManager.createQuery("SELECT DISTINCT p FROM Product p JOIN FETCH p.categories", Product.class);
-		List<Product> products = q.getResultList();
-		return products;
-	}
 
 }

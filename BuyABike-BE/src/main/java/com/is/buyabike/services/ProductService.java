@@ -35,7 +35,4 @@ public class ProductService {
 		productDao.persist(product);
 	}
 
-	public List<Product> getProductsWithCategory() {
-		return productDao.findAllWithCategories();
-	}
 }

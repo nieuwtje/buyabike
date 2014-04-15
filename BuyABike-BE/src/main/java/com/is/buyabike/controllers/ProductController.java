@@ -35,12 +35,6 @@ public class ProductController {
 				
 	}
 	
-	@RequestMapping(value="/withcategories", method = RequestMethod.GET)
-	public @ResponseBody List<Product> getAllProductsWithCategories(){	
-		List<Product> products= productService.getProductsWithCategory();	
-		return products;
-				
-	}
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public @ResponseBody Product getProduct(@PathVariable long id){
