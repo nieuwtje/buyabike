@@ -24,6 +24,13 @@ public class OrderDao {
 		Query q = em.createQuery("FROM Order");
 		return q.getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = true)
+	public List<Order> listOrdersEager() {
+		Query q = em.createQuery("SELECT DISTINCT o FROM Order o JOIN FETCH o.items");
+		return q.getResultList();
+	}
 
 	@Transactional
 	public Order persist(Order order) {

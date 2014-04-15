@@ -30,7 +30,8 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+	// TODO: omzetten naar een functie met een joined fetch (dao)
+	@OneToMany(cascade = {CascadeType.ALL})
 	private List<OrderItem> items = new ArrayList<OrderItem>();
 	
 	@Enumerated(EnumType.ORDINAL)

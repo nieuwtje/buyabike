@@ -19,14 +19,14 @@ public class OrderController {
 	@Autowired
 	private OrderService service;
 	
-	@RequestMapping(method = RequestMethod.PUT)
+	@RequestMapping(method = RequestMethod.PUT, consumes = "application/json")
 	public void submitOrder(@RequestBody Order order) {
 		service.persist(order);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, headers = "accept=application/json")
 	public @ResponseBody List<Order> getOrdersAsJSON() {
-		return service.listOrders();
+		return service.listOrdersEager();
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, params = {"id"})

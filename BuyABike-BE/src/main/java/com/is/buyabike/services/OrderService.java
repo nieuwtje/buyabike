@@ -21,6 +21,10 @@ public class OrderService {
 		return dao.listOrders();
 	}
 
+	public List<Order> listOrdersEager() {
+		return dao.listOrdersEager();
+	}
+
 	public Order find(long id) {
 		return dao.findOrderById(id);
 	}
