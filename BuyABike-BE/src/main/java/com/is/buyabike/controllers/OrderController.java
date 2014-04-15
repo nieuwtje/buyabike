@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,15 +25,16 @@ public class OrderController {
 	@Autowired
 	private MailService mailService;
 	
-	@RequestMapping(method = RequestMethod.PUT, consumes = "application/json")
+	@RequestMapping(method = RequestMethod.PUT, consumes="application/json")
 	public @ResponseBody boolean submitOrder(@RequestBody Order order) {
 		try {
 			service.persist(order);
 			String to = "t.nieuwenhuys@hotmail.com"; // TODO to: client.getEmailAddress();
-			mailService.sendMail("info@buyabike.com", to, "Order confirmation", "Order received!");
+			mailService.sendMail("endcasebuyabike@gmail.com", to, "Order confirmation", "Order received!");
 			return true;
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 	}
