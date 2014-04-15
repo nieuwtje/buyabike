@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.is.buyabike.domain.order.Order;
 import com.is.buyabike.domain.order.Order.OrderStatus;
+import com.is.buyabike.services.MailService;
 import com.is.buyabike.services.OrderService;
 
 @Controller
@@ -20,9 +21,20 @@ public class OrderController {
 	@Autowired
 	private OrderService service;
 	
+	@Autowired
+	private MailService mailService;
+	
 	@RequestMapping(method = RequestMethod.PUT, consumes = "application/json")
-	public void submitOrder(@RequestBody Order order) {
-		service.persist(order);
+	public @ResponseBody boolean submitOrder(@RequestBody Order order) {
+		try {
+			service.persist(order);
+			String to = "t.nieuwenhuys@hotmail.com"; // TODO to: client.getEmailAddress();
+			mailService.sendMail("info@buyabike.com", to, "Order confirmation", "Order received!");
+			return true;
+		}
+		catch (Exception e) {
+			return false;
+		}
 	}
 	
 	@RequestMapping(value = "/{id}/{status}", method = RequestMethod.PUT)

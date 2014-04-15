@@ -14,10 +14,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.is.buyabike.domain.Product;
 
 @Entity
 @Table(name="clientorder")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Order {
 	public enum OrderStatus {
 		RECEIVED,
