@@ -1,7 +1,9 @@
 package com.is.buyabike.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,7 +26,7 @@ public class Category {
 	private String name;
 	private String description;
 	@ManyToMany
-	private List<Product> products = new ArrayList<Product>();
+	private Set<Product> products = new HashSet<Product>();
 	
 	public Category(String name, String description) {
 		super();
@@ -56,11 +58,11 @@ public class Category {
 		this.description = description;
 	}
 
-	public List<Product> getProducts() {
+	public Set<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(List<Product> products) {
+	public void setProducts(Set<Product> products) {
 		this.products = products;
 	}
 	public void addProduct(Product product){

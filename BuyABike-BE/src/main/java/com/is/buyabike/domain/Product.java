@@ -1,7 +1,9 @@
 package com.is.buyabike.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,7 +46,7 @@ public class Product {
 	private Supplier supplier;
 
 	@ManyToMany(mappedBy="products")
-	private List<Category> categories = new ArrayList<Category>();
+	private Set<Category> categories = new HashSet<Category>();
 
 	public Product(String name, String description, String imageUrl, double purchasePrice, double resellPrice, int stock) {
 		super();
@@ -120,11 +122,11 @@ public class Product {
 		return id;
 	}
 
-	public List<Category> getCategories() {
+	public Set<Category> getCategories() {
 		return categories;
 	}
 
-	public void setCategories(List<Category> categories) {
+	public void setCategories(Set<Category> categories) {
 		this.categories = categories;
 	}
 	
