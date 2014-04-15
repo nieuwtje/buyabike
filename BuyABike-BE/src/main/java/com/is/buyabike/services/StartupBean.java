@@ -67,5 +67,14 @@ public class StartupBean {
 		order.setStatus(OrderStatus.RECEIVED);
 		
 		orderService.persist(order);
+
+		Order order2 = new Order();
+		order2.addProduct(product3);
+		order2.addProduct(product2);
+		order2.addProduct(product1);
+		order2.addProduct(product2);
+		order2.setStatus(OrderStatus.RECEIVED);
+		
+		orderService.persist(order2);
 	}
 }

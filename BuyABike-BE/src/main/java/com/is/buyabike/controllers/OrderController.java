@@ -14,7 +14,7 @@ import com.is.buyabike.domain.order.Order;
 import com.is.buyabike.services.OrderService;
 
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/orders")
 public class OrderController {
 	@Autowired
 	private OrderService service;
@@ -32,5 +32,10 @@ public class OrderController {
 	@RequestMapping(method = RequestMethod.GET, params = {"id"})
 	public @ResponseBody Order getOrderById(@RequestParam("id") long id) {
 		return service.find(id);
+	}
+	
+	@RequestMapping(method = RequestMethod.DELETE, params = {"id"})
+	public @ResponseBody Order removeOrderById(@RequestParam("id") long id) {
+		return service.remove(id);
 	}
 }

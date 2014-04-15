@@ -53,7 +53,15 @@ public class OrderDao {
 
 	@Transactional
 	public Order findOrderById(long id) {
-		return em.find(Order.class, id);
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Order> cq = cb.createQuery(Order.class);
+		Root<Order> root = cq.from(Order.class);
+		
+		root.fetch("items");
+		cq.select(root).where(cb.equal(root.get("id"), id));
+		
+		Query q = em.createQuery(cq);
+		return (Order) q.getResultList().get(0);
 	}
 
 	@Transactional
