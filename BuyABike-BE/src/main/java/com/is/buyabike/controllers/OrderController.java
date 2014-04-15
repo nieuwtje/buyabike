@@ -38,8 +38,8 @@ public class OrderController {
 		return service.listOrdersEager();
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, params = {"id"})
-	public @ResponseBody Order getOrderById(@RequestParam("id") long id) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public @ResponseBody Order getOrderById(@PathVariable("id") long id) {
 		return service.find(id);
 	}
 	
@@ -48,8 +48,8 @@ public class OrderController {
 		return OrderStatus.values();
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE, params = {"id"})
-	public @ResponseBody Order removeOrderById(@RequestParam("id") long id) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public @ResponseBody Order removeOrderById(@PathVariable("id") long id) {
 		return service.remove(id);
 	}
 }
