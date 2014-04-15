@@ -22,22 +22,18 @@ import com.is.buyabike.domain.order.OrderItem;
 public class OrderDao {
 	@PersistenceContext
 	private EntityManager em;
-	private CriteriaBuilder cb = em.getCriteriaBuilder();
 	
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public List<Order> listOrders() {
-		CriteriaQuery<Order> cq = cb.createQuery(Order.class);
-		Root<Order> root = cq.from(Order.class);
-		cq.select(root);
-		
-		Query q = em.createQuery(cq);
+		Query q = em.createQuery("FROM Order");
 		return q.getResultList();
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public List<Order> listOrdersEager() {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Order> cq = cb.createQuery(Order.class);
 		Root<Order> root = cq.from(Order.class);
 		
