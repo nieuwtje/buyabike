@@ -16,6 +16,10 @@ public class OrderService {
 	public Order persist(Order order) {
 		return dao.persist(order);
 	}
+	
+	public Order update(Order order) {
+		return dao.update(order);
+	}
 
 	public List<Order> listOrders() {
 		return dao.listOrders();

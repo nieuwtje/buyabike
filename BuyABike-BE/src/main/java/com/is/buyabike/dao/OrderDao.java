@@ -52,6 +52,13 @@ public class OrderDao {
 	}
 
 	@Transactional
+	public Order update(Order order) {
+		em.merge(order);
+		
+		return findOrderById(order.getId());
+	}
+
+	@Transactional
 	public Order findOrderById(long id) {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Order> cq = cb.createQuery(Order.class);
