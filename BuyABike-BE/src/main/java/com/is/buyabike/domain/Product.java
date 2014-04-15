@@ -15,9 +15,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-
-
-
 @Entity
 public class Product {
 

@@ -61,6 +61,7 @@ public class StartupBean {
 		
 		Order order = new Order();
 		order.addProduct(product1);
+		order.addProduct(product2);
 		order.setStatus(OrderStatus.RECEIVED);
 		
 		orderService.persist(order);
