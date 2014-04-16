@@ -12,6 +12,7 @@ import static org.hamcrest.core.Is.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import com.is.buyabike.dao.ProductDao;
 import com.is.buyabike.domain.Address;
