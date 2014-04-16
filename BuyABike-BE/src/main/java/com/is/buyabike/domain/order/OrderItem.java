@@ -11,6 +11,10 @@ import com.is.buyabike.domain.Product;
 
 @Entity
 public class OrderItem {
+	public enum ProductStatus {
+		// TODO
+	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
@@ -20,6 +24,8 @@ public class OrderItem {
 	
 	@Min(0)
 	private int amount;
+	
+	private ProductStatus status;
 	
 	public OrderItem() {
 		
@@ -56,5 +62,13 @@ public class OrderItem {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public ProductStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ProductStatus status) {
+		this.status = status;
 	}
 }
