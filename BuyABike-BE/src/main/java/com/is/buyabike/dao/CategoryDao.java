@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.is.buyabike.domain.Category;
+import com.is.buyabike.domain.Product;
 
 @Transactional
 @Repository
@@ -20,7 +21,9 @@ public class CategoryDao {
 
 	@Transactional(readOnly = true)
 	public Category findWithId(long id) {
-		return entityManager.find(Category.class, id);
+		TypedQuery<Category> q = entityManager.createQuery("SELECT c FROM Category c JOIN FETCH c.products WHERE c.id = :id",Category.class);
+		q.setParameter("id", id);
+		return q.getSingleResult();
 	}
 
 	@Transactional
