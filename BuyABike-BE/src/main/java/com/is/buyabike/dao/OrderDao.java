@@ -4,18 +4,15 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Fetch;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.is.buyabike.domain.order.Order;
-import com.is.buyabike.domain.order.OrderItem;
 
 @Repository
 @Transactional
@@ -23,14 +20,12 @@ public class OrderDao {
 	@PersistenceContext
 	private EntityManager em;
 	
-	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public List<Order> listOrders() {
-		Query q = em.createQuery("FROM Order");
+		TypedQuery<Order> q = em.createQuery("FROM Order", Order.class);
 		return q.getResultList();
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public List<Order> listOrdersEager() {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -40,7 +35,7 @@ public class OrderDao {
 		root.fetch("items");
 		cq.select(root).distinct(true);
 		
-		Query q = em.createQuery(cq);
+		TypedQuery<Order> q = em.createQuery(cq);
 		return q.getResultList();
 	}
 
@@ -67,8 +62,8 @@ public class OrderDao {
 		root.fetch("items");
 		cq.select(root).where(cb.equal(root.get("id"), id));
 		
-		Query q = em.createQuery(cq);
-		return (Order) q.getResultList().get(0);
+		TypedQuery<Order> q = em.createQuery(cq);
+		return q.getSingleResult();
 	}
 
 	@Transactional
