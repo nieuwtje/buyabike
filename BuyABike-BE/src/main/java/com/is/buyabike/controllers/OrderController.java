@@ -47,7 +47,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, headers = "accept=application/json")
-	public @ResponseBody List<Order> getOrdersAsJSON() {
+	public @ResponseBody List<Order> getOrders() {
 		return service.listOrdersEager();
 	}
 	
@@ -57,7 +57,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value = "/{id}/status", method = RequestMethod.GET)
-	public @ResponseBody OrderStatus getStatusByIdOrder(@PathVariable("id") long id) {
+	public @ResponseBody OrderStatus getStatusByOrderId(@PathVariable("id") long id) {
 		return service.find(id).getStatus();
 	}
 	
