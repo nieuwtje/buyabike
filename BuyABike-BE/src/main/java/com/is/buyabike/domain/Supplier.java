@@ -11,7 +11,7 @@ public class Supplier {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	public long getId() {
 		return id;
 	}
@@ -21,7 +21,7 @@ public class Supplier {
 	private Address address;
 	private String website;
 	private String phoneNumer;
-	
+
 	public Supplier(String name, Address address, String website,
 			String phoneNumer) {
 		super();
@@ -31,10 +31,10 @@ public class Supplier {
 		this.phoneNumer = phoneNumer;
 	}
 
-	public Supplier(){
-		
+	public Supplier() {
+
 	}
-	
+
 	public String getName() {
 		return name;
 	}

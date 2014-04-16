@@ -20,33 +20,38 @@ public class ProductDao {
 
 	@Transactional
 	public Product findWithId(long id) {
-		TypedQuery<Product> q = entityManager.createQuery("SELECT p FROM Product p JOIN FETCH p.categories WHERE p.id = :id", Product.class);
+		TypedQuery<Product> q = entityManager
+				.createQuery(
+						"SELECT p FROM Product p JOIN FETCH p.categories WHERE p.id = :id",
+						Product.class);
 		q.setParameter("id", id);
 		return q.getSingleResult();
 	}
 
 	@Transactional
-	public void persist(Product product){
+	public void persist(Product product) {
 		entityManager.persist(product);
 	}
 
 	@Transactional
-	public List<Product> findAll(){
-		TypedQuery<Product> q = entityManager.createQuery("SELECT DISTINCT p FROM Product p JOIN FETCH p.categories", Product.class);
+	public List<Product> findAll() {
+		TypedQuery<Product> q = entityManager.createQuery(
+				"SELECT DISTINCT p FROM Product p JOIN FETCH p.categories",
+				Product.class);
 		List<Product> products = q.getResultList();
 		return products;
 	}
 
 	@Transactional
-	public void delete(Product product){
-		Product productToRemove = entityManager.find(Product.class, product.getId());
+	public void delete(Product product) {
+		Product productToRemove = entityManager.find(Product.class,
+				product.getId());
 		entityManager.remove(productToRemove);
 	}
 
 	@Transactional
-	public Product update(Product product){
+	public Product update(Product product) {
 		return entityManager.merge(product);
 	}
-
 
 }

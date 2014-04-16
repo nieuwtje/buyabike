@@ -9,7 +9,7 @@ public class ClientService {
 
 	public void create(Client client) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

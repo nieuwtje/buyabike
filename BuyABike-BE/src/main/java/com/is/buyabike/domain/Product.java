@@ -1,8 +1,6 @@
 package com.is.buyabike.domain;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -14,8 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotEmpty;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Product {
@@ -45,10 +41,11 @@ public class Product {
 	@ManyToOne
 	private Supplier supplier;
 
-	@ManyToMany(mappedBy="products")
+	@ManyToMany(mappedBy = "products")
 	private Set<Category> categories = new HashSet<Category>();
 
-	public Product(String name, String description, String imageUrl, double purchasePrice, double resellPrice, int stock) {
+	public Product(String name, String description, String imageUrl,
+			double purchasePrice, double resellPrice, int stock) {
 		super();
 		this.name = name;
 		this.description = description;
@@ -85,7 +82,8 @@ public class Product {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-	public void incrementStock(int amount){
+
+	public void incrementStock(int amount) {
 		this.stock = this.stock + amount;
 	}
 
@@ -132,8 +130,8 @@ public class Product {
 	public void setCategories(Set<Category> categories) {
 		this.categories = categories;
 	}
-	
-	public void addCategory(Category category){
+
+	public void addCategory(Category category) {
 		category.addProduct(this);
 		this.categories.add(category);
 	}

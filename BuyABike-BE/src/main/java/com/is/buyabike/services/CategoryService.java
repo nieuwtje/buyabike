@@ -12,16 +12,16 @@ import com.is.buyabike.domain.Category;
 public class CategoryService {
 	@Autowired
 	private CategoryDao categoryDao;
-	
-	public List<Category> getCategoriesWithProducts(){
+
+	public List<Category> getCategoriesWithProducts() {
 		return categoryDao.findAllWithProducts();
 	}
-	
-	public List<Category> getCategories(){
+
+	public List<Category> getCategories() {
 		return categoryDao.findAll();
 	}
-	
-	public Category getCategory(long id){
+
+	public Category getCategory(long id) {
 		return categoryDao.findWithId(id);
 	}
 

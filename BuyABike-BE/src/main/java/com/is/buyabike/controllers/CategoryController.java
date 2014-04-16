@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.is.buyabike.domain.Category;
-import com.is.buyabike.domain.Product;
 import com.is.buyabike.services.CategoryService;
-import com.is.buyabike.services.ProductService;
 
 @Controller
 @RequestMapping("/categories")
@@ -20,24 +18,24 @@ public class CategoryController {
 
 	@Autowired
 	private CategoryService categoryService;
-	
-	
+
 	@RequestMapping(method = RequestMethod.GET)
-	public @ResponseBody List<Category> getAllCategories(){	
-		List<Category> categories= categoryService.getCategories();	
+	public @ResponseBody
+	List<Category> getAllCategories() {
+		List<Category> categories = categoryService.getCategories();
 		return categories;
-				
 	}
-	
-	@RequestMapping(value="/withproducts",method = RequestMethod.GET)
-	public @ResponseBody List<Category> getAllCategoriesWithProducts(){	
-		List<Category> categories= categoryService.getCategoriesWithProducts();	
+
+	@RequestMapping(value = "/withproducts", method = RequestMethod.GET)
+	public @ResponseBody
+	List<Category> getAllCategoriesWithProducts() {
+		List<Category> categories = categoryService.getCategoriesWithProducts();
 		return categories;
-				
 	}
-	
-	@RequestMapping(value="/{id}",method = RequestMethod.GET)
-	public @ResponseBody Category getCategory(@PathVariable long id){
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public @ResponseBody
+	Category getCategory(@PathVariable long id) {
 		return categoryService.getCategory(id);
 	}
 }
