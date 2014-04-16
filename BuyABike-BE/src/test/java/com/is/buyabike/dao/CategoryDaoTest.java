@@ -95,7 +95,7 @@ public class CategoryDaoTest {
 		
 		
 		when(query.getResultList()).thenReturn(expectedCategories);
-		List<Category> actualCategories = categoryDao.findAll();
+		List<Category> actualCategories = categoryDao.findAllWithProducts();
 		verify(entityManagerMock).createQuery(anyString(), eq(Category.class));
 		verify(query).getResultList();
 		assertThat(actualCategories,is(expectedCategories));
