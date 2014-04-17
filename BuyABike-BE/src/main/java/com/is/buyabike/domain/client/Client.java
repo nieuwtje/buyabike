@@ -27,6 +27,8 @@ public class Client {
 	private String firstName;
 	private String lastName;
 	
+	private String email;
+	
 	@Embedded
 	private Address address;
 	
@@ -79,5 +81,17 @@ public class Client {
 	
 	public void addOrder(Order order){
 		orders.add(order);
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 }
