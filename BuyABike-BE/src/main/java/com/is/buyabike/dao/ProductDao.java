@@ -11,6 +11,7 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.is.buyabike.domain.Category;
 import com.is.buyabike.domain.Product;
 
 @Transactional
@@ -52,6 +53,9 @@ public class ProductDao {
 	@Transactional
 	public void delete(Product product) {
 		
+
+		
+//		
 		Query q = entityManager.createQuery("delete from Product p WHERE p.id = :id");
 		q.setParameter("id", product.getId());
 		System.out.println(q.executeUpdate() + " rows deleted");
