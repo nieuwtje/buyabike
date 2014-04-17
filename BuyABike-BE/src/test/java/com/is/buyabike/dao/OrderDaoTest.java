@@ -1,6 +1,7 @@
 package com.is.buyabike.dao;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class OrderDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 		Order expectedOrder = new Order();
 		expectedOrder.addProduct(product);
 		orderDao.persist(expectedOrder);
-		Order actualOrder = orderDao.findOrderById(1);
+		Order actualOrder = orderDao.findOrderById(expectedOrder.getId());
 		
 		assertThat(actualOrder, is(expectedOrder));
 	}
@@ -78,10 +79,14 @@ public class OrderDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 		Order expectedOrder = new Order();
 		expectedOrder.addProduct(product);
 		orderDao.persist(expectedOrder);
+		long id = expectedOrder.getId();
 		
 		Order actualOrder = orderDao.removeOrder(expectedOrder);
 
 		assertThat(actualOrder, is(expectedOrder));
+		
+		Order order2 = orderDao.findOrderById(id);
+		assertNull(order2);
 	}
 
 	@Test
