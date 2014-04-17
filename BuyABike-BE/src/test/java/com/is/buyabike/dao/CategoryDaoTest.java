@@ -28,7 +28,7 @@ public class CategoryDaoTest {
 	@Mock
 	private EntityManager entityManagerMock;
 	@Mock
-	TypedQuery<Category> query;
+	private TypedQuery<Category> query;
 
 	@Before
 	public void setUp() throws Exception {
