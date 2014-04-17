@@ -3,11 +3,14 @@ package com.is.buyabike.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 
 
 @Entity
@@ -19,6 +22,9 @@ public class Category {
 	private String name;
 	private String description;
 	@ManyToMany
+    @JoinTable(name = "product_categories",
+    joinColumns =  {@JoinColumn(name = "category_id")},
+    inverseJoinColumns = @JoinColumn(name = "product_id"))
 	private Set<Product> products = new HashSet<Product>();
 
 	public Category(String name, String description) {
@@ -61,6 +67,15 @@ public class Category {
 
 	public void addProduct(Product product) {
 		this.products.add(product);
+	}
+
+	public void removeProduct(Product product) {
+		if(this.products.contains(product)){
+			this.products.remove(product);
+			product.removeFromCategory(this);
+		}
+		
+		
 	}
 
 }

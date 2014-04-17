@@ -1,6 +1,7 @@
 package com.is.buyabike.dao;
 
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNull.*;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
@@ -44,12 +45,28 @@ public class ProductDaoTest extends AbstractTransactionalJUnit4SpringContextTest
 	public void test(){
 		Product product = new Product("MTB 1", "MTB 1", "test", 100.00, 200.00, 20);
 		Category category = new Category("mtbs","mtbs");
-		category.addProduct(product);
+		
 		productDao.persist(product);
+		category.addProduct(product);
 		categoryDao.persist(category);
+		
+		long pId = product.getId();
+		long cId = category.getId();
+
 		System.out.println("id " + product.getId());
-		Product product2 = productDao.findWithId(product.getId());
-		assertThat(product,is(product2));
+		
+		category.removeProduct(product);
+		
+		product= productDao.update(product);
+		category = categoryDao.update(category);
+		
+		productDao.delete(product);
+		System.out.println("test123 " + product.getId());
+		
+		product = productDao.findWithId(pId);
+		Category category2 = categoryDao.findWithId(cId);
+		assertThat(product,is(nullValue()));
+		assertThat(category2,is(notNullValue()));
 	}
 //	@Test
 //	public void testFindWithId() {

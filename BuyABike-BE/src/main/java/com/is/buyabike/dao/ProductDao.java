@@ -3,7 +3,9 @@ package com.is.buyabike.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
@@ -25,7 +27,12 @@ public class ProductDao {
 						"SELECT p FROM Product p JOIN FETCH p.categories WHERE p.id = :id",
 						Product.class);
 		q.setParameter("id", id);
-		return q.getSingleResult();
+		try{
+
+			return q.getSingleResult();
+		}catch(NoResultException e){
+			return null;
+		}
 	}
 
 	@Transactional
@@ -44,9 +51,11 @@ public class ProductDao {
 
 	@Transactional
 	public void delete(Product product) {
-		Product productToRemove = entityManager.find(Product.class,
-				product.getId());
-		entityManager.remove(productToRemove);
+		
+		Query q = entityManager.createQuery("delete from Product p WHERE p.id = :id");
+		q.setParameter("id", product.getId());
+		System.out.println(q.executeUpdate() + " rows deleted");
+		//entityManager.remove(product);
 	}
 
 	@Transactional

@@ -3,12 +3,16 @@ package com.is.buyabike.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.PreRemove;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -41,7 +45,10 @@ public class Product {
 	@ManyToOne
 	private Supplier supplier;
 
-	@ManyToMany(mappedBy = "products")
+	@ManyToMany
+    @JoinTable(name = "product_categories",
+    joinColumns =  {@JoinColumn(name = "product_id")},
+    inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private Set<Category> categories = new HashSet<Category>();
 
 	public Product(String name, String description, String imageUrl,
@@ -136,6 +143,13 @@ public class Product {
 		this.categories.add(category);
 	}
 
+	public void removeFromCategory(Category category) {
+		if(this.categories.contains(category)){
+
+			this.categories.remove(category);
+			category.removeProduct(this);
+		}
+	}
 	@Override
 	public boolean equals(Object object) {
 		if (object instanceof Product) {
