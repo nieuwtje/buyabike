@@ -32,17 +32,13 @@ public class OrderController {
 	public @ResponseBody boolean submitOrder(ServletRequest request, @RequestBody Order order) {
 		try {
 			Client client = null;
-			if (request != null) {
-				HttpServletRequest req = (HttpServletRequest) request;
-				client = (Client) req.getSession().getAttribute("client");
-				order.setClient(client);
-			}
+			HttpServletRequest req = (HttpServletRequest) request;
+			client = (Client) req.getSession().getAttribute("client");
+			order.setClient(client);
 			service.persist(order);
 			
-			if (request != null) {
-				String to = client.getEmail();
-				mailService.sendMail("endcasebuyabike@gmail.com", to, "Order confirmation", "Order received!");
-			}
+			String to = client.getEmail();
+			mailService.sendMail("endcasebuyabike@gmail.com", to, "Order confirmation", "Order received!");
 			
 			return true;
 		}

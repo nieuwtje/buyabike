@@ -10,6 +10,9 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import junitx.util.PrivateAccessor;
 
 import org.junit.Before;
@@ -22,19 +25,24 @@ import com.is.buyabike.domain.Supplier;
 import com.is.buyabike.domain.client.Client;
 import com.is.buyabike.domain.order.Order;
 import com.is.buyabike.domain.order.Order.OrderStatus;
+import com.is.buyabike.services.MailService;
 import com.is.buyabike.services.OrderService;
 
 public class OrderControllerTest {
 
 	private OrderController orderController;
 	private OrderService orderServiceMock;
+	private MailService mailServiceMock;
+	private HttpServletRequest req;
 	
 	@Before
 	public void setUp() throws Exception {
 		orderController = new OrderController();
 		orderServiceMock = mock(OrderService.class);
+		mailServiceMock = mock(MailService.class);
+		req = mock(HttpServletRequest.class);
 		PrivateAccessor.setField(orderController, "service", orderServiceMock);
-
+		PrivateAccessor.setField(orderController, "mailService", mailServiceMock);
 	}
 
 	private List<Order> getOrdersForTest() {
@@ -97,8 +105,14 @@ public class OrderControllerTest {
 	public void submitOrderShouldPersistANewOrderToTheService() {
 		Order expectedOrder = getOrdersForTest().get(0);
 		
+		Address address = new Address("krommeweg", "123", "Zuid-Laren", "Utrecht", "Nederland");
+		Client client = new Client("Berend", "Botje", "t.nieuwenhuys@hotmail.com", address, "pw");
+		
+		HttpSession session = mock(HttpSession.class);
+		when(req.getSession()).thenReturn(session);
+		when(session.getAttribute("client")).thenReturn(client);
 		when(orderServiceMock.persist(expectedOrder)).thenReturn(expectedOrder);
-		boolean result = orderController.submitOrder(null, expectedOrder);
+		boolean result = orderController.submitOrder(req, expectedOrder);
 		verify(orderServiceMock).persist(expectedOrder);
 		
 		assert(result);
