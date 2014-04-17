@@ -26,29 +26,36 @@
 	<!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-	<img class='pull-left' id='site-logo' src="/images/buyabikelogo.png"
-		alt="logo of Buy a bike ">
-	<div class="header header-row">
-		<div class='flexrow'>
-			<img id='header-img' src="/images/header.jpg" alt="store foto's ">
-		</div>
-		<div class='flexrow header-row' ng-controller="MenuCtrl">
-			<ul class="nav nav-pills pull-center">
-				<li ng-class="menuClass('')"><a class="text-center" ng-href="#"><span
-						class="glyphicon glyphicon-home pull-left"></span> Home</a></li>
-				<li ng-class="menuClass('products')" class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-				Producten <span class="caret"></span>
-				</a>
-					<ul class="dropdown-menu">
-					<li><a ng-href="#/producten/fietsen">Fietsen</a></li>
-					</ul>
-				
-				</li>
-			</ul>
-		</div>
-	</div>
-	<div class="container">
+	<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">BuyAbike</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="#">Home</a></li>
+        <li class="dropdown">
+          <a href="#/producten" class="dropdown-toggle" data-toggle="dropdown">Producten <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#/producten/fietsen">Fietsen</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+	<div id="page-content-wrapper">
 		<div ng-view></div>
 	</div>
 
@@ -66,6 +73,7 @@
 	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
 	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 	<script src="bower_components/angular-route/angular-route.js"></script>
+	<script src="http://underscorejs.org/underscore-min.js"></script>
 	<!-- endbower -->
 	<!-- endbuild -->
 
@@ -73,11 +81,14 @@
 	<script src="scripts/app.js"></script>
 	<script src="scripts/controllers/menu.js"></script>
 	<script src="scripts/controllers/main.js"></script>
-		<script src="scripts/controllers/filter.js"></script>
-	<script src="scripts/controllers/product.js"></script>
 
-	<script src="scripts/services/endpoints.js"></script>
+	<script src="scripts/controllers/product.js"></script>
+	<script src="scripts/controllers/filter.js"></script>
+
+	<script src="scripts/services/services.js"></script>
+	<script src="scripts/services/categorieservice.js"></script>
 	<script src="scripts/services/productservice.js"></script>
 	<!-- endbuild -->
+
 </body>
 </html>

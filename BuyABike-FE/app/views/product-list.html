@@ -1,32 +1,76 @@
-<div class="well" ng-show='products'>Sorry er zijn helaas geen producten gevonden.</div>
-
-<div class="well" ng-hide='products'>
-<label>
-  categorie :
-      <select id="categorielist" class="input-medium" ng-model="search.category">
-      <option></option>
-         <option ng-repeat="categorie in categorys">{{categorie.name}}</option>
-      </select>
-</label>
-Naam <input ng-model="search.name"><br>
-</div>
-	
-<div class="col-sm-6 col-md-4" ng-repeat="product in products | filter:search:strict">
-	<div class="panel panel-danger">
-		<!-- Default panel contents -->
-		<div class="panel-heading">{{product.name}}</div>
-		<div class="panel-body flexcolumn">
-			<img src="/images/bikes/bike{{product.id}}.jpg" alt="foto of {{product.name}}"class="productfoto-list">
-			<div>
-				<p>{{product.description}}</p>
-				<p><span>{{product.resellPrice | currency:"&euro; "}}</span></p>
-				<p>{{product.stock}}</p>
-				<p>{{product.category.name}}</p>
-				<p>
-					<a href="#" class="btn btn-primary" role="button">Details</a>
-				</p>
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-2">
+		<p class="lead">Filter Producten</p>
+		<div class="panel-group" id="accordion">
+			<div class="panel panel-default">
+				<div class="panel-heading" data-toggle="collapse" data-target="#NameFilter">
+					<h4 class="panel-title">Naam</h4>
+				</div>
+				<div id="NameFilter" class="panel-collapse collapse">
+					<div class="panel-body">
+						<div class="list-group">
+							<label>Naam: <input class='input-medium'ng-model="search.name"></label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading" data-toggle="collapse" data-target="#CategoryFilter">
+					<h4 class="panel-title">Catgorieen</h4>
+				</div>
+				<div id="CategoryFilter" class="panel-collapse collapse">
+					<div class="panel-body">
+						<div class="list-group">
+							<label>categorie: <select id="categorielist"
+								class="input-medium" ng-model="search.category">
+									<option></option>
+									<option ng-repeat="categorie in categorys">{{categorie.name}}</option>
+							</select>
+						</div>
+						</label>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 
+
+
+
+
+
+
+
+	<div class='container'>
+		<div class="row">
+			<div class="well" ng-show='products'>Sorry er zijn helaas geen
+				producten gevonden.</div>
+
+
+			<div class="col-sm-6 col-md-4"
+				ng-repeat="product in products |property:'categories.name':search.category">
+				<div class="panel panel-danger">
+					<!-- Default panel contents -->
+					<div class="panel-heading">{{product.name}}</div>
+					<div class="panel-body flexcolumn">
+						<img src="/images/bikes/bike{{product.id}}.jpg"
+							alt="foto of {{product.name}}" class="productfoto-list">
+						<div>
+							<p>{{product.description}}</p>
+							<p>
+								<span>{{product.resellPrice | currency:"&euro; "}}</span>
+							</p>
+							<p>{{product.stock}}</p>
+							<p>{{product.category.name}}</p>
+							<div class='clearfix'>
+								<a href="#" class="btn btn-primary" role="button">Details</a>
+								<a href="#" class="btn btn-success" role="button">Kopen</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

@@ -1,8 +1,6 @@
-var productServices = angular.module('productServices', ['ngResource']);
- 
-productServices.factory('Product', ['$resource',
+buyabikeServices.factory('Product', ['$resource',
   function($resource){
-    return $resource(Endpoints.products, {}, {
-      query: {method:'GET', params:{productId:'products'}, isArray:true}
+    return $resource(Endpoints.base+Endpoints.products, {}, {
+      query: {method:'GET', isArray:true}
     });
   }]);

@@ -314,7 +314,6 @@ module.exports = function (grunt) {
     // concat: {
     //   dist: {}
     // },
-
     // Test settings
     karma: {
       unit: {
