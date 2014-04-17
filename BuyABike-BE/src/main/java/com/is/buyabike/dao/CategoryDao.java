@@ -3,6 +3,7 @@ package com.is.buyabike.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -20,9 +21,14 @@ public class CategoryDao {
 
 	@Transactional(readOnly = true)
 	public Category findWithId(long id) {
-		TypedQuery<Category> q = entityManager.createQuery("SELECT c FROM Category c JOIN FETCH c.products WHERE c.id = :id",Category.class);
+		TypedQuery<Category> q = entityManager.createQuery("SELECT c FROM Category c LEFT JOIN FETCH c.products WHERE c.id = :id",Category.class);
 		q.setParameter("id", id);
-		return q.getSingleResult();
+		try{
+
+			return q.getSingleResult();
+		}catch(NoResultException e){
+			return null;
+		}
 	}
 
 	@Transactional
