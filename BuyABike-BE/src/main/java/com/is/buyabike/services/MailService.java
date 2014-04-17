@@ -21,10 +21,4 @@ public class MailService implements IMailManager {
 
 		mailSender.send(message);	
 	}
-	
-	public void sendPreConfiguredMail(String to, SimpleMailMessage configuredMessage) {
-	    SimpleMailMessage mailMessage = new SimpleMailMessage(configuredMessage);
-	    mailMessage.setTo(to);
-	    mailSender.send(mailMessage);
-	}
 }
