@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.is.buyabike.domain.Product;
 import com.is.buyabike.domain.client.Client;
@@ -40,6 +41,7 @@ public class Order {
 	private OrderStatus status = OrderStatus.RECEIVED;
 	
 	@ManyToOne
+	@JsonIgnore(value = true)
 	private Client client;
 	
 	public Order() {
@@ -122,5 +124,9 @@ public class Order {
 
 	public Client getClient() {
 		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
 	}
 }

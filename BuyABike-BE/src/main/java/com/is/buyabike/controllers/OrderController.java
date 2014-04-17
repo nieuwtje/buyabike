@@ -2,6 +2,9 @@ package com.is.buyabike.controllers;
 
 import java.util.List;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.is.buyabike.domain.client.Client;
 import com.is.buyabike.domain.order.Order;
 import com.is.buyabike.domain.order.Order.OrderStatus;
 import com.is.buyabike.services.MailService;
@@ -25,11 +29,21 @@ public class OrderController {
 	private MailService mailService;
 	
 	@RequestMapping(method = RequestMethod.PUT, consumes="application/json")
-	public @ResponseBody boolean submitOrder(@RequestBody Order order) {
+	public @ResponseBody boolean submitOrder(ServletRequest request, @RequestBody Order order) {
 		try {
+			Client client = null;
+			if (request != null) {
+				HttpServletRequest req = (HttpServletRequest) request;
+				client = (Client) req.getSession().getAttribute("client");
+				order.setClient(client);
+			}
 			service.persist(order);
-			String to = order.getClient().getEmail();
-			mailService.sendMail("endcasebuyabike@gmail.com", to, "Order confirmation", "Order received!");
+			
+			if (request != null) {
+				String to = client.getEmail();
+				mailService.sendMail("endcasebuyabike@gmail.com", to, "Order confirmation", "Order received!");
+			}
+			
 			return true;
 		}
 		catch (Exception e) {

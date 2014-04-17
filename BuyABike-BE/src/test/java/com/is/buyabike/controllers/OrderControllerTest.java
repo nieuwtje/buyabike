@@ -22,23 +22,18 @@ import com.is.buyabike.domain.Supplier;
 import com.is.buyabike.domain.client.Client;
 import com.is.buyabike.domain.order.Order;
 import com.is.buyabike.domain.order.Order.OrderStatus;
-import com.is.buyabike.services.ClientService;
-import com.is.buyabike.services.MailService;
 import com.is.buyabike.services.OrderService;
 
 public class OrderControllerTest {
 
 	private OrderController orderController;
 	private OrderService orderServiceMock;
-	private MailService mailServiceMock;
 	
 	@Before
 	public void setUp() throws Exception {
 		orderController = new OrderController();
 		orderServiceMock = mock(OrderService.class);
-		mailServiceMock = mock(MailService.class);
 		PrivateAccessor.setField(orderController, "service", orderServiceMock);
-		PrivateAccessor.setField(orderController, "mailService", mailServiceMock);
 
 	}
 
@@ -103,7 +98,7 @@ public class OrderControllerTest {
 		Order expectedOrder = getOrdersForTest().get(0);
 		
 		when(orderServiceMock.persist(expectedOrder)).thenReturn(expectedOrder);
-		boolean result = orderController.submitOrder(expectedOrder);
+		boolean result = orderController.submitOrder(null, expectedOrder);
 		verify(orderServiceMock).persist(expectedOrder);
 		
 		assert(result);
