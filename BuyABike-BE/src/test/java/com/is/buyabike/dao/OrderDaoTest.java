@@ -2,128 +2,109 @@ package com.is.buyabike.dao;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
-import junitx.util.PrivateAccessor;
-
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
+import com.is.buyabike.domain.Product;
 import com.is.buyabike.domain.order.Order;
 
-@RunWith(MockitoJUnitRunner.class)
-public class OrderDaoTest {
-
+@ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring/appServlet/dao-context.xml"})
+public class OrderDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
+	@Autowired
 	private OrderDao orderDao;
-	@Mock
-	private EntityManager entityManagerMock;
-	@Mock
-	TypedQuery<Order> query;
-	@Mock
-	CriteriaBuilder cb;
-	@Mock
-	CriteriaQuery<Order> cq;
-	@Mock
-	Root<Order> root;
+	
+	@Autowired
+	private ProductDao productDao;
+	
+	private Product product;
 	
 	@Before
-	public void setUp() throws Exception {
-		Order order = new Order();
-		order.setId(1);
-		
-		orderDao = new OrderDao();
-		PrivateAccessor.setField(orderDao, "em", entityManagerMock);
-		
-		when(entityManagerMock.getCriteriaBuilder()).thenReturn(cb);
-		when(cb.createQuery(Order.class)).thenReturn(cq);
-		when(cq.from(Order.class)).thenReturn(root);
-		when(cq.select(root)).thenReturn(cq);
-		when(entityManagerMock.createQuery(cq)).thenReturn(query);
-		when(query.getSingleResult()).thenReturn(order);
+	public void init() {
+		product = new Product("name", "description", "image", 2.00, 2.00, 10);
+		productDao.persist(product);
 	}
-
+	
 	@Test
 	public void testFindWithId() {
 		Order expectedOrder = new Order();
-		when(entityManagerMock.createQuery(anyString(), eq(Order.class))).thenReturn(query);
-		when(query.getSingleResult()).thenReturn(expectedOrder);
-		Order actualOrder = orderDao.findOrderById(1);
-		verify(query).getSingleResult();
-		assertThat(actualOrder, is(expectedOrder));
-	}
-
-	@Test
-	public void testPersist() {
-		Order expectedOrder = new Order();
+		expectedOrder.addProduct(product);
 		orderDao.persist(expectedOrder);
-		verify(entityManagerMock).persist(any(Order.class));
+		Order actualOrder = orderDao.findOrderById(1);
+		
+		assertThat(actualOrder, is(expectedOrder));
 	}
 
 	@Test
 	public void testListAll() {
 		List<Order> expectedOrders = new ArrayList<Order>();
-		expectedOrders.add(new Order());
-		expectedOrders.add(new Order());
+		Order order1 = new Order();
+		order1.addProduct(product);
+		orderDao.persist(order1);
+		Order order2 = new Order();
+		order2.addProduct(product);
+		orderDao.persist(order2);
+		expectedOrders.add(order1);
+		expectedOrders.add(order2);
 
-		when(entityManagerMock.createQuery(anyString(), eq(Order.class))).thenReturn(query);
-		when(query.getResultList()).thenReturn(expectedOrders);
 		List<Order> actualOrders = orderDao.listOrders();
-		verify(entityManagerMock).createQuery(anyString(), eq(Order.class));
-		verify(query).getResultList();
 		assertThat(actualOrders, is(expectedOrders));
 	}
 
 	@Test
 	public void testListAllEager() {
 		List<Order> expectedOrders = new ArrayList<Order>();
-		expectedOrders.add(new Order());
-		expectedOrders.add(new Order());
-
-		when(entityManagerMock.createQuery(anyString(), eq(Order.class))).thenReturn(query);
-		when(query.getResultList()).thenReturn(expectedOrders);
+		Order order1 = new Order();
+		order1.addProduct(product);
+		orderDao.persist(order1);
+		Order order2 = new Order();
+		order2.addProduct(product);
+		orderDao.persist(order2);
+		expectedOrders.add(order1);
+		expectedOrders.add(order2);
+		
 		List<Order> actualOrders = orderDao.listOrdersEager();
-		verify(query).getResultList();
 		assertThat(actualOrders, is(expectedOrders));
 	}
 
 	@Test
 	public void testDelete() {
-		Order order = new Order();
-		when(entityManagerMock.find(Order.class, order.getId())).thenReturn(order);
-		orderDao.removeOrder(order);
-		verify(entityManagerMock).remove(any(Order.class));
+		Order expectedOrder = new Order();
+		expectedOrder.addProduct(product);
+		orderDao.persist(expectedOrder);
+		
+		Order actualOrder = orderDao.removeOrder(expectedOrder);
+
+		assertThat(actualOrder, is(expectedOrder));
 	}
 
 	@Test
 	public void testDeleteById() {
-		Order order = new Order();
-		order.setId(1);
-		when(entityManagerMock.find(Order.class, order.getId())).thenReturn(order);
-		orderDao.removeOrder(order.getId());
-		verify(entityManagerMock).remove(any(Order.class));
+		Order expectedOrder = new Order();
+		expectedOrder.addProduct(product);
+		orderDao.persist(expectedOrder);
+		
+		Order actualOrder = orderDao.removeOrder(expectedOrder.getId());
+		
+		assertThat(actualOrder, is(expectedOrder));
 	}
 
 	@Test
 	public void testUpdate() {
-		Order expectedOrder = new Order();
-		orderDao.update(expectedOrder);
-		verify(entityManagerMock).merge(any(Order.class));
+		Order order = new Order();
+		order.addProduct(product);
+		orderDao.persist(order);
+		
+		Order expectedOrder = orderDao.findOrderById(order.getId());
+		expectedOrder.addProduct(product);
+		Order actualOrder = orderDao.update(expectedOrder);
+		
+		assertThat(actualOrder, is(expectedOrder));
 	}
-
 }
