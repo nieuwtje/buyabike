@@ -10,11 +10,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.is.buyabike.domain.Product;
+import com.is.buyabike.domain.client.Client;
 
 @Entity
 @Table(name = "clientorder")
@@ -37,8 +39,17 @@ public class Order {
 	@Enumerated(EnumType.ORDINAL)
 	private OrderStatus status = OrderStatus.RECEIVED;
 	
+	@ManyToOne
+	private Client client;
+	
 	public Order() {
 		super();
+	}
+	
+	public Order(Client client) {
+		super();
+		this.client = client;
+		client.addOrder(this);
 	}
 	
 	public List<OrderItem> getItems() {
@@ -107,5 +118,9 @@ public class Order {
 
 	public void setStatus(OrderStatus status) {
 		this.status = status;
+	}
+
+	public Client getClient() {
+		return client;
 	}
 }

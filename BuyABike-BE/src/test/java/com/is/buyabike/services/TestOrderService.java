@@ -15,7 +15,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.is.buyabike.dao.OrderDao;
+import com.is.buyabike.domain.Address;
 import com.is.buyabike.domain.Product;
+import com.is.buyabike.domain.client.Client;
 import com.is.buyabike.domain.order.Order;
 import com.is.buyabike.domain.order.OrderItem;
 
@@ -23,17 +25,22 @@ public class TestOrderService {
 	private OrderService service;
 	private OrderDao dao;
 	
+	private Client client;
+	
 	@Before
 	public void setUp() throws NoSuchFieldException {
 		service = new OrderService();
 		dao = mock(OrderDao.class);
 		PrivateAccessor.setField(service, "dao", dao);
+
+		Address address = new Address("krommeweg", "123", "Zuid-Laren", "Utrecht", "Nederland");
+		client = new Client("Berend", "Botje", "berend@botje.nl", address, "pw");
 	}
 	
 	@Test
 	public void verifyThatTheServiceWillCallListOrdersFromTheDAO() {
 		final List<Order> list = new ArrayList<Order>();
-		Order order1 = new Order();
+		Order order1 = new Order(client);
 		Product p1 = new Product("test", "test product", "url.jpg", 10.50, 10.50, 5);
 		Product p2 = new Product("test2", "test product2", "url.jpg", 12.50, 12.50, 20);
 		Product p3 = new Product("test3", "test product3", "url.jpg", 8.50, 8.50, 15);
@@ -54,7 +61,7 @@ public class TestOrderService {
 	@Test
 	public void verifyThatTheServiceWillCallListOrdersEagerFromTheDAO() {
 		final List<Order> list = new ArrayList<Order>();
-		Order order1 = new Order();
+		Order order1 = new Order(client);
 		Product p1 = new Product("test", "test product", "url.jpg", 10.50, 10.50, 5);
 		Product p2 = new Product("test2", "test product2", "url.jpg", 12.50, 12.50, 20);
 		Product p3 = new Product("test3", "test product3", "url.jpg", 8.50, 8.50, 15);
@@ -74,7 +81,7 @@ public class TestOrderService {
 	
 	@Test
 	public void verifyThatTheServiceWillCallPersistFromTheDAO() {
-		Order order1 = new Order();
+		Order order1 = new Order(client);
 		order1.setId(1);
 		
 		when(dao.persist(order1)).thenReturn(order1);
@@ -85,7 +92,7 @@ public class TestOrderService {
 	
 	@Test
 	public void verifyThatTheServiceWillCallUpdateFromTheDAO() {
-		Order order1 = new Order();
+		Order order1 = new Order(client);
 		order1.setId(1);
 		
 		when(dao.update(order1)).thenReturn(order1);
@@ -96,7 +103,7 @@ public class TestOrderService {
 	
 	@Test
 	public void verifyThatTheServiceWillCallRemoveFromTheDAO() {
-		Order order1 = new Order();
+		Order order1 = new Order(client);
 		order1.setId(1);
 		
 		when(dao.removeOrder(order1)).thenReturn(order1);
@@ -107,7 +114,7 @@ public class TestOrderService {
 	
 	@Test
 	public void verifyThatTheServiceWillCallRemoveByIdFromTheDAO() {
-		Order order1 = new Order();
+		Order order1 = new Order(client);
 		order1.setId(1);
 		
 		when(dao.removeOrder(order1.getId())).thenReturn(order1);
@@ -118,7 +125,7 @@ public class TestOrderService {
 	
 	@Test
 	public void verifyThatTheServiceWillCallFindFromTheDAO() {
-		Order order1 = new Order();
+		Order order1 = new Order(client);
 		order1.setId(1);
 		
 		when(dao.findOrderById(order1.getId())).thenReturn(order1);

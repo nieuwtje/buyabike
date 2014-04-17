@@ -12,6 +12,7 @@ import com.is.buyabike.domain.Address;
 import com.is.buyabike.domain.Category;
 import com.is.buyabike.domain.Product;
 import com.is.buyabike.domain.Supplier;
+import com.is.buyabike.domain.client.Client;
 import com.is.buyabike.domain.order.Order;
 import com.is.buyabike.domain.order.Order.OrderStatus;
 
@@ -26,6 +27,8 @@ public class StartupBean {
 	private SupplierDao supplierDao;
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private ClientService clientService;
 
 	@PostConstruct
 	public void init() {
@@ -63,7 +66,11 @@ public class StartupBean {
 		categoryDao.persist(category1);
 		categoryDao.persist(category2);
 
-		Order order = new Order();
+		Address address = new Address("krommeweg", "123", "Zuid-Laren", "Utrecht", "Nederland");
+		Client client = new Client("Berend", "Botje", "berend@botje.nl", address, "pw");
+		clientService.create(client);
+		
+		Order order = new Order(client);
 		order.addProduct(product1);
 		order.addProduct(product1);
 		order.addProduct(product1);
@@ -72,7 +79,7 @@ public class StartupBean {
 
 		orderService.persist(order);
 
-		Order order2 = new Order();
+		Order order2 = new Order(client);
 		order2.addProduct(product3);
 		order2.addProduct(product2);
 		order2.addProduct(product1);

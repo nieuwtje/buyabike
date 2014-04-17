@@ -19,8 +19,10 @@ import com.is.buyabike.domain.Address;
 import com.is.buyabike.domain.Category;
 import com.is.buyabike.domain.Product;
 import com.is.buyabike.domain.Supplier;
+import com.is.buyabike.domain.client.Client;
 import com.is.buyabike.domain.order.Order;
 import com.is.buyabike.domain.order.Order.OrderStatus;
+import com.is.buyabike.services.ClientService;
 import com.is.buyabike.services.MailService;
 import com.is.buyabike.services.OrderService;
 
@@ -29,7 +31,7 @@ public class OrderControllerTest {
 	private OrderController orderController;
 	private OrderService orderServiceMock;
 	private MailService mailServiceMock;
-
+	
 	@Before
 	public void setUp() throws Exception {
 		orderController = new OrderController();
@@ -62,7 +64,10 @@ public class OrderControllerTest {
 		product2.addCategory(category2);
 		product3.addCategory(category2);
 
-		Order order1 = new Order();
+		Address address = new Address("krommeweg", "123", "Zuid-Laren", "Utrecht", "Nederland");
+		Client client = new Client("Berend", "Botje", "berend@botje.nl", address, "pw");
+		
+		Order order1 = new Order(client);
 		order1.setId(1);
 		order1.addProduct(product1);
 		order1.addProduct(product1);
@@ -70,7 +75,7 @@ public class OrderControllerTest {
 		order1.addProduct(product2);
 		order1.addProduct(product2);
 
-		Order order2 = new Order();
+		Order order2 = new Order(client);
 		order2.setId(2);
 		order2.addProduct(product1);
 		order2.addProduct(product3);
@@ -78,7 +83,7 @@ public class OrderControllerTest {
 		order2.addProduct(product2);
 		order2.addProduct(product3);
 
-		Order order3 = new Order();
+		Order order3 = new Order(client);
 		order3.setId(3);
 		order3.addProduct(product2);
 		order3.addProduct(product2);

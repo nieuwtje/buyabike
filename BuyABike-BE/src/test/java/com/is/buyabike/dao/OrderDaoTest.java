@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
+import com.is.buyabike.domain.Address;
 import com.is.buyabike.domain.Product;
+import com.is.buyabike.domain.client.Client;
 import com.is.buyabike.domain.order.Order;
 
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/appServlet/dao-context.xml"})
@@ -24,17 +26,25 @@ public class OrderDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 	@Autowired
 	private ProductDao productDao;
 	
+	@Autowired
+	private ClientDao clientDao;
+	
 	private Product product;
+	private Client client;
 	
 	@Before
 	public void init() {
 		product = new Product("name", "description", "image", 2.00, 2.00, 10);
 		productDao.persist(product);
+
+		Address address = new Address("krommeweg", "123", "Zuid-Laren", "Utrecht", "Nederland");
+		client = new Client("Berend", "Botje", "berend@botje.nl", address, "pw");
+		clientDao.persist(client);
 	}
 	
 	@Test
 	public void testFindWithId() {
-		Order expectedOrder = new Order();
+		Order expectedOrder = new Order(client);
 		expectedOrder.addProduct(product);
 		orderDao.persist(expectedOrder);
 		Order actualOrder = orderDao.findOrderById(expectedOrder.getId());
@@ -45,10 +55,10 @@ public class OrderDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 	@Test
 	public void testListAll() {
 		List<Order> expectedOrders = new ArrayList<Order>();
-		Order order1 = new Order();
+		Order order1 = new Order(client);
 		order1.addProduct(product);
 		orderDao.persist(order1);
-		Order order2 = new Order();
+		Order order2 = new Order(client);
 		order2.addProduct(product);
 		orderDao.persist(order2);
 		expectedOrders.add(order1);
@@ -61,10 +71,10 @@ public class OrderDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 	@Test
 	public void testListAllEager() {
 		List<Order> expectedOrders = new ArrayList<Order>();
-		Order order1 = new Order();
+		Order order1 = new Order(client);
 		order1.addProduct(product);
 		orderDao.persist(order1);
-		Order order2 = new Order();
+		Order order2 = new Order(client);
 		order2.addProduct(product);
 		orderDao.persist(order2);
 		expectedOrders.add(order1);
@@ -76,7 +86,7 @@ public class OrderDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 
 	@Test
 	public void testDelete() {
-		Order expectedOrder = new Order();
+		Order expectedOrder = new Order(client);
 		expectedOrder.addProduct(product);
 		orderDao.persist(expectedOrder);
 		long id = expectedOrder.getId();
@@ -91,7 +101,7 @@ public class OrderDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 
 	@Test
 	public void testDeleteById() {
-		Order expectedOrder = new Order();
+		Order expectedOrder = new Order(client);
 		expectedOrder.addProduct(product);
 		orderDao.persist(expectedOrder);
 		
@@ -102,7 +112,7 @@ public class OrderDaoTest extends AbstractTransactionalJUnit4SpringContextTests 
 
 	@Test
 	public void testUpdate() {
-		Order order = new Order();
+		Order order = new Order(client);
 		order.addProduct(product);
 		orderDao.persist(order);
 		

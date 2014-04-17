@@ -13,6 +13,6 @@ public class ClientService {
 	private ClientDao clientDao;
 	
 	public void create(Client client) {
-		// TODO Auto-generated method stub
+		clientDao.persist(client);
 	}
 }

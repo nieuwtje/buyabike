@@ -28,7 +28,7 @@ public class OrderController {
 	public @ResponseBody boolean submitOrder(@RequestBody Order order) {
 		try {
 			service.persist(order);
-			String to = "t.nieuwenhuys@hotmail.com"; // TODO to: client.getEmailAddress();
+			String to = order.getClient().getEmail();
 			mailService.sendMail("endcasebuyabike@gmail.com", to, "Order confirmation", "Order received!");
 			return true;
 		}

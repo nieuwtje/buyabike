@@ -32,18 +32,19 @@ public class Client {
 	@Embedded
 	private Address address;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<Order>();
 	
 	public Client(){
 		
 	}
 
-	public Client(String firstName, String lastName, Address address,
-			String password) {
+	public Client(String firstName, String lastName, String email, Address address, String password) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.email = email;
+		
 		this.address = address;
 	}
 
