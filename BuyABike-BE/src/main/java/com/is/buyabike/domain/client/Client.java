@@ -80,7 +80,4 @@ public class Client {
 	public void addOrder(Order order){
 		orders.add(order);
 	}
-
-	
-
 }

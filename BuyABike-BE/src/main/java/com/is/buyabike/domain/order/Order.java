@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.is.buyabike.domain.Product;
 
 @Entity
-@Table(name="clientorder")
+@Table(name = "clientorder")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Order {
 	public enum OrderStatus {

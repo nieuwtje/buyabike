@@ -9,7 +9,6 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.is.buyabike.domain.Product;
 import com.is.buyabike.domain.Supplier;
 
 @Transactional

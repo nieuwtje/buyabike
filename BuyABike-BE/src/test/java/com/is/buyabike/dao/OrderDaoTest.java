@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import com.is.buyabike.domain.Product;
 import com.is.buyabike.domain.order.Order;
 
-@ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring/appServlet/dao-context.xml"})
+@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/appServlet/dao-context.xml"})
 public class OrderDaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	@Autowired
 	private OrderDao orderDao;

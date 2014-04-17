@@ -9,6 +9,8 @@ import com.is.buyabike.mail.IMailManager;
 
 @Service
 public class MailService implements IMailManager {
+	private static final long serialVersionUID = 7383374204603900374L;
+
 	@Autowired
 	private JavaMailSenderImpl mailSender;
  

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.is.buyabike.domain.Category;
-import com.is.buyabike.domain.Product;
 
 @Transactional
 @Repository
