@@ -19,6 +19,24 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.is.buyabike.domain.Product;
 import com.is.buyabike.domain.client.Client;
 
+/**
+ * 
+ * Content-Type: application/json
+ * {
+ * 		"items": [
+ * 			{
+ * 				"product": {
+ * 					"id": ..
+ * 				}
+ * 				"amount": ..
+ * 			},
+ * 			.
+ * 			.
+ *			.
+ * 		]
+ * }
+ *
+ */
 @Entity
 @Table(name = "clientorder")
 @JsonIgnoreProperties(ignoreUnknown = true)

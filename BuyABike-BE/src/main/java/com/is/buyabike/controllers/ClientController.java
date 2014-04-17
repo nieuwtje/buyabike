@@ -25,7 +25,7 @@ public class ClientController {
 	@Autowired
 	private ClientService service;
 
-	@RequestMapping(value = "create", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.PUT, consumes = "application/json")
 	public @ResponseBody boolean create(ServletRequest request, @RequestBody Client client) {
 		try {
 			service.create(client);

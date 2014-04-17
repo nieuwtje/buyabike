@@ -3,17 +3,41 @@ package com.is.buyabike.domain.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.is.buyabike.domain.Address;
 import com.is.buyabike.domain.order.Order;
 
+/**
+ * 
+ * Content-Type: application/json
+ * {
+ * 		"firstName": ..,
+ * 		"lastName": ..,
+ * 		"email": ..,
+ * 		"address": {
+ * 			"street": ..,
+ * 			"houseNumber": ..,
+ * 			"city": ..,
+ * 			"state": ..,
+ * 			"country": ..
+ * 		}
+ * }
+ * 
+ */
+
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Client {
 	
 	@Id
@@ -27,6 +51,9 @@ public class Client {
 	private String firstName;
 	private String lastName;
 	
+	@NotNull
+	@NotEmpty
+	@Column(unique = true)
 	private String email;
 	
 	@Embedded

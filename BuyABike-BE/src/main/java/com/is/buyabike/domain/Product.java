@@ -13,7 +13,10 @@ import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Product {
 
 	@Id
