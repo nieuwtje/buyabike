@@ -7,9 +7,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.is.buyabike.domain.Product;
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderItem {
 	public enum ProductStatus {
 		// TODO

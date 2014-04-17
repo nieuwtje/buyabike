@@ -3,17 +3,43 @@ package com.is.buyabike.domain.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Required;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.is.buyabike.domain.Address;
 import com.is.buyabike.domain.order.Order;
 
+/**
+ * 
+ * Content-Type: application/json
+ * {
+ * 		"firstName": ..,
+ * 		"lastName": ..,
+ * 		"email": ..,
+ * 		"password": ..,
+ * 		"address": {
+ * 			"street": ..,
+ * 			"houseNumber": ..,
+ * 			"city": ..,
+ * 			"state": ..,
+ * 			"country": ..
+ * 		}
+ * }
+ * 
+ */
+
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Client {
 	
 	@Id
@@ -24,9 +50,21 @@ public class Client {
 		return id;
 	}
 
+	@NotNull
+	@NotEmpty
 	private String firstName;
+
+	@NotNull
+	@NotEmpty
 	private String lastName;
 	
+	@NotNull
+	@NotEmpty
+	private String password;
+	
+	@NotNull
+	@NotEmpty
+	@Column(unique = true)
 	private String email;
 	
 	@Embedded
@@ -44,7 +82,7 @@ public class Client {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		
+		this.password = password;
 		this.address = address;
 	}
 
@@ -94,5 +132,13 @@ public class Client {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

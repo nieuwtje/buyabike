@@ -15,4 +15,8 @@ public class ClientService {
 	public void create(Client client) {
 		clientDao.persist(client);
 	}
+
+	public Client loginClient(String email, String password) {
+		return clientDao.login(email, password);
+	}
 }
