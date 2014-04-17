@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Required;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.is.buyabike.domain.Address;
@@ -25,6 +26,7 @@ import com.is.buyabike.domain.order.Order;
  * 		"firstName": ..,
  * 		"lastName": ..,
  * 		"email": ..,
+ * 		"password": ..,
  * 		"address": {
  * 			"street": ..,
  * 			"houseNumber": ..,
@@ -48,8 +50,17 @@ public class Client {
 		return id;
 	}
 
+	@NotNull
+	@NotEmpty
 	private String firstName;
+
+	@NotNull
+	@NotEmpty
 	private String lastName;
+	
+	@NotNull
+	@NotEmpty
+	private String password;
 	
 	@NotNull
 	@NotEmpty
@@ -71,7 +82,7 @@ public class Client {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		
+		this.password = password;
 		this.address = address;
 	}
 
@@ -121,5 +132,13 @@ public class Client {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

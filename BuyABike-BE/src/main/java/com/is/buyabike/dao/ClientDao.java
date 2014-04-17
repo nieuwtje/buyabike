@@ -3,13 +3,18 @@ package com.is.buyabike.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.is.buyabike.domain.client.Client;
+import com.is.buyabike.domain.order.Order;
 
 @Transactional
 @Repository
@@ -30,8 +35,7 @@ public class ClientDao {
 
 	@Transactional(readOnly = true)
 	public List<Client> findAll() {
-		TypedQuery<Client> q = entityManager.createQuery(
-				"SELECT p FROM Client p", Client.class);
+		TypedQuery<Client> q = entityManager.createQuery("SELECT p FROM Client p", Client.class);
 		return q.getResultList();
 	}
 
@@ -44,6 +48,22 @@ public class ClientDao {
 	@Transactional
 	public Client update(Client client) {
 		return entityManager.merge(client);
+	}
+
+	public Client login(String email, String password) {
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Client> cq = cb.createQuery(Client.class);
+		Root<Client> root = cq.from(Client.class);
+		
+		cq.select(root).where(cb.and(cb.equal(root.get("email"), email), cb.equal(root.get("password"), password)));
+		
+		TypedQuery<Client> q = entityManager.createQuery(cq);
+		try { 
+			return q.getSingleResult();
+		}
+		catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }

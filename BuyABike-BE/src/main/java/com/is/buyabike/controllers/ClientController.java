@@ -6,13 +6,12 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.is.buyabike.domain.client.Client;
 import com.is.buyabike.domain.order.Order;
@@ -29,7 +28,7 @@ public class ClientController {
 	public @ResponseBody boolean create(ServletRequest request, @RequestBody Client client) {
 		try {
 			service.create(client);
-			login(request, client);
+			login(request, client.getEmail(), client.getPassword());
 			
 			return true;
 		}
@@ -38,11 +37,17 @@ public class ClientController {
 		}
 	}
 	
-	@RequestMapping(value = "login", method = RequestMethod.POST)
-	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void login(ServletRequest request, @RequestBody Client client) {
+	@RequestMapping(value = "login", method = RequestMethod.POST, params = {"email", "password"})
+	public @ResponseBody boolean login(ServletRequest request, @RequestParam("email") String email, @RequestParam("password") String password) {
 		HttpServletRequest req = (HttpServletRequest) request;
-		req.getSession().setAttribute("client", client);
+		
+		Client client = service.loginClient(email, password);
+		if (client != null) {
+			req.getSession().setAttribute("client", client);
+			return true;
+		}
+		
+		return false;
 	}
 
 	@RequestMapping(value = "orders", method = RequestMethod.GET)
