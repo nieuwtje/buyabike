@@ -49,18 +49,18 @@
             <li><a href="#/producten/fietsen">Fietsen</a></li>
           </ul>
         </li>
-        <li class=""><a href="#" ng-click="showLogin = true">Login</a></li>
+        <li class=""><a href="#" data-toggle="collapse" data-target="#container-collapse">Login</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
-<div class="container" ng-show="showLogin" class="animate-show">
+<div class="container panel-collapse collapse" id="container-collapse">
 	<div class="row">
         <div class="span12">
     		<div id="loginModal">
               <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" ng-click="showLogin = false">×</button>
+                <button type="button" class="close" data-dismiss="modal" data-toggle="collapse" data-target="#container-collapse">×</button>
                 <h3>Have an Account?</h3>
               </div>
               <div class="modal-body">
@@ -71,7 +71,7 @@
 					</ul>
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane active in" id="login">
-							<form class="form-horizontal" action='' method="POST">
+							<form class="form-horizontal" action='#' method="POST" ng-submit="submitLogin()">
 								<fieldset>
 									<div id="legend">
 										<legend class="">Login</legend>
@@ -80,8 +80,7 @@
 										<!-- Username -->
 										<label class="control-label" for="username">Username</label>
 										<div class="controls">
-											<input type="text" id="username" name="username"
-												placeholder="" class="input-xlarge">
+											<input type="text" id="username" name="username" placeholder="Username" class="input-xlarge" ng-model="form.username">
 										</div>
 									</div>
 
@@ -89,8 +88,7 @@
 										<!-- Password-->
 										<label class="control-label" for="password">Password</label>
 										<div class="controls">
-											<input type="password" id="password" name="password"
-												placeholder="" class="input-xlarge">
+											<input type="password" id="password" name="password" placeholder="Password" class="input-xlarge" ng-model="form.password">
 										</div>
 									</div>
 
@@ -98,7 +96,7 @@
 									<div class="control-group">
 										<!-- Button -->
 										<div class="controls">
-											<button class="btn btn-success">Login</button>
+											<button class="btn btn-success" ng-click="submit">Login</button>
 										</div>
 									</div>
 								</fieldset>
@@ -167,7 +165,7 @@
 	<script src="scripts/app.js"></script>
 	<script src="scripts/controllers/menu.js"></script>
 	<script src="scripts/controllers/main.js"></script>
-
+	<script src="scripts/controllers/form.js"></script>
 	<script src="scripts/controllers/product.js"></script>
 
 	<script src="scripts/services/services.js"></script>
