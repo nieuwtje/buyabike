@@ -1,6 +1,4 @@
-buyabikeServices.factory('Product', ['$resource',
-  function($resource){
-    return $resource(Endpoints.base+Endpoints.products, {}, {
-      query: {method:'GET', isArray:true}
-    });
+buyabikeServices.factory('Product', ['$resource', 'endpoints',
+  function($resource, endpoints){
+    return $resource(endpoints.base+endpoints.products, {productId:'@productId'});
   }]);
