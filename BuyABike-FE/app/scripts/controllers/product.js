@@ -29,7 +29,8 @@ productControllers.controller('ProductListCtrl', ['$scope', 'Product', 'Category
   }
 }]);
 
-productControllers.controller('ProductDetailCtrl', [ '$scope', '$routeParams',
-		function($scope, $routeParams) {
-			$scope.productId = $routeParams.productId;
+productControllers.controller('ProductDetailCtrl', [ '$scope', '$routeParams','Product',
+		function($scope, $routeParams, Product) {
+			//$scope.productId = $routeParams.productId;
+			$scope.product = Product.get({ productId: $routeParams.productId });
 		} ]);

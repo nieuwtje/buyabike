@@ -1,6 +1,6 @@
-buyabikeServices.factory('Category', ['$resource',
-  function($resource){
-    return $resource(Endpoints.base+Endpoints.categories, {}, {
+buyabikeServices.factory('Category', ['$resource', 'endpoints',
+  function($resource,endpoints){
+    return $resource(endpoints.base+endpoints.categories, {}, {
       query: {method:'GET', isArray:true}
     });
   }]);
