@@ -66,15 +66,15 @@
 				producten gevonden.</div>
 
 
-			<div class="col-sm-6 col-md-4"
+			<div class="col-sm-6 col-md-4" 
 				ng-repeat="product in products | filter:filterBy | filter:search | filter:inRange">
 
-				<div class="panel panel-danger">
+				<div class="panel panel-danger" style="height:500px">
 					<!-- Default panel contents -->
 					<div class="panel-heading">{{product.name}}</div>
 					<div class="panel-body flexcolumn">
 						<img src="/images/bikes/bike{{product.id}}.jpg"
-							alt="foto of {{product.name}}" class="productfoto-list">
+							alt="foto of {{product.name}}" class="productfoto-list" style=" display:block;max-height:300px;max-width:300px;height:auto;width:auto;">
 						<div>
 							<p>{{product.description| limitTo:numLimit}}...</p>
 							<p>
