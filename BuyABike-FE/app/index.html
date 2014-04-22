@@ -71,16 +71,16 @@
 					</ul>
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane active in" id="login">
-							<form class="form-horizontal" action='#' method="POST" ng-submit="submitLogin()">
+							<form class="form-horizontal" ng-controller="FormLoginCtrl" ng-submit="submitLogin(form)">
 								<fieldset>
 									<div id="legend">
 										<legend class="">Login</legend>
 									</div>
 									<div class="control-group">
 										<!-- Username -->
-										<label class="control-label" for="username">Username</label>
+										<label class="control-label" for="email">Email</label>
 										<div class="controls">
-											<input type="text" id="username" name="username" placeholder="Username" class="input-xlarge" ng-model="form.username">
+											<input type="text" id="email" name="email" placeholder="Email" class="input-xlarge" ng-model="form.email">
 										</div>
 									</div>
 
@@ -157,7 +157,6 @@
 	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
 	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 	<script src="bower_components/angular-route/angular-route.js"></script>
-	<script src="bower_components/angular-animate/angular-animate.js"></script>
 	<!-- endbower -->
 	<!-- endbuild -->
 
@@ -171,6 +170,7 @@
 	<script src="scripts/services/services.js"></script>
 	<script src="scripts/services/categorieservice.js"></script>
 	<script src="scripts/services/productservice.js"></script>
+	<script src="scripts/services/clientservice.js"></script>
 	<script src="scripts/directives/slider.js"></script>
 	<!-- endbuild -->
 

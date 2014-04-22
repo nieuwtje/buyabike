@@ -6,7 +6,6 @@ productControllers.controller('ProductListCtrl', ['$scope', 'Product', 'Category
   $scope.orderProp = 'age';
 	$scope.numLimit = 150;
 	$scope.filterBy = function(product) {
-		console.log($scope)
 		if ($scope.selectedC === undefined
 				|| $scope.selectedC.length === 0) {
 			return true;
@@ -29,7 +28,8 @@ productControllers.controller('ProductListCtrl', ['$scope', 'Product', 'Category
   }
 }]);
 
-productControllers.controller('ProductDetailCtrl', [ '$scope', '$routeParams',
-		function($scope, $routeParams) {
-			$scope.productId = $routeParams.productId;
+productControllers.controller('ProductDetailCtrl', [ '$scope', '$routeParams','Product',
+		function($scope, $routeParams, Product) {
+			//$scope.productId = $routeParams.productId;
+			$scope.product = Product.get({ productId: $routeParams.productId });
 		} ]);

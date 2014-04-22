@@ -120,21 +120,3 @@ body {
 img {
 	max-width: 100%;
 }
-
-/*****************/
-/* Animate login */
-/*****************/
-.animate-show {
-	opacity: 1;
-	-webkit-transition: all linear 0.5s;
-	transition: all linear 0.5s;
-}
-
-.animate-show.ng-hide-add,.animate-show.ng-hide-remove {
-	display: block !important;
-}
-
-.animate-show.ng-hide {
-	line-height: 0;
-	opacity: 0;
-}
