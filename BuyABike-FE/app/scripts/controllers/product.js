@@ -4,6 +4,7 @@ productControllers.controller('ProductListCtrl', ['$scope', 'Product', 'Category
   $scope.products = Product.query();
   $scope.categorys = Category.query();
   $scope.orderProp = 'age';
+  $scope.numLimit=150;
   console.log($scope)
   $scope.filterBy = function(product) {
 	  console.log($scope)
