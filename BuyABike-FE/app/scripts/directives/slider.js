@@ -1,5 +1,5 @@
 var sliderDirectives = angular.module('sliderDirectives', []);
-sliderDirectives.directive('uiSlider', ['uiSliderConfig', '$timeout', function(uiSliderConfig, $timeout) {
+sliderDirectives.value('uiSliderConfig',{}).directive('uiSlider', ['uiSliderConfig', '$timeout', function(uiSliderConfig, $timeout) {
     uiSliderConfig = uiSliderConfig || {};
     return {
         require: 'ngModel',

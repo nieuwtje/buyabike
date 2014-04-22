@@ -18,4 +18,12 @@ productControllers.controller('ProductListCtrl', ['$scope', 'Product', 'Category
 	  });
 	  return pfff;
 	}
+  $scope.inRange = function(product) {
+	  if($scope.priceRange){
+		  var min = $scope.priceRange[0];
+		  var max = $scope.priceRange[1];
+		 return (product.resellPrice > min && product.resellPrice < max)
+	  }
+	  return true;
+  }
 }]);
