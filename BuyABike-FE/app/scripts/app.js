@@ -1,7 +1,5 @@
 'use strict';
-var buyabikefeapp = angular.module('buyAbikeFeApp',
-		[ 'ngCookies', 'ngResource', 'ngSanitize', 'ngRoute', 'ngAnimate', 'mainControllers','menuControllers','productControllers','filterControllers', 'buyabikeServices' ]);
-
+var buyabikefeapp = angular.module('buyAbikeFeApp',[ 'ngCookies', 'ngResource', 'ngSanitize', 'ngRoute','ngAnimate','mainControllers','menuControllers','productControllers', 'buyabikeServices','sliderDirectives' ]);
 buyabikefeapp.config(
 		function($routeProvider) {
 			$routeProvider.when('/', {
@@ -11,6 +9,9 @@ buyabikefeapp.config(
 				controller : 'ProductListCtrl'
 			}).when('/producten/fietsen', {
 				redirectTo : '/producten'
+			}).when('/producten/:productId',{
+				templateUrl : 'views/product-details.html',
+				controller : 'ProductDetailCtrl'
 			}).otherwise({
 				redirectTo : '/'
 			});

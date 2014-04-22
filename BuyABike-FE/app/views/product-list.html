@@ -2,6 +2,7 @@
 	<div class="col-md-1"></div>
 	<div class="col-md-2">
 		<p class="lead">Filter Producten</p>
+		
 		<div class="panel-group" id="accordion">
 			<div class="panel panel-default">
 				<div class="panel-heading" data-toggle="collapse" data-target="#NameFilter">
@@ -17,7 +18,7 @@
 			</div>
 			<div class="panel panel-default">
 				<div class="panel-heading" data-toggle="collapse" data-target="#CategoryFilter">
-					<h4 class="panel-title">Catgorieen</h4>
+					<h4 class="panel-title">Categorieen</h4>
 				</div>
 				<div id="CategoryFilter" class="panel-collapse collapse">
 					<div class="panel-body">
@@ -27,8 +28,25 @@
 									<option></option>
 									<option ng-repeat="categorie in categorys">{{categorie.name}}</option>
 							</select>
+							</label>
 						</div>
-						</label>
+						
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading" data-toggle="collapse" data-target="#PriceFilter">
+					<h4 class="panel-title">Prijs</h4>
+				</div>
+				<div id="PriceFilter" class="panel-collapse collapse">
+					<div class="panel-body">
+						<div class="list-group">
+						
+						
+							<label >Prijs van {{priceRange[0] | currency:"&euro; "}} tot {{priceRange[1] | currency:"&euro; "}}</label>
+							<div ui-slider="{range: true}" min="0" max="2500" step="0.10" use-decimals ng-model="priceRange"></div>
+						
+						</div>
 					</div>
 				</div>
 			</div>
@@ -49,7 +67,8 @@
 
 
 			<div class="col-sm-6 col-md-4"
-				ng-repeat="product in products | filter:filterBy:search">
+				ng-repeat="product in products | filter:filterBy | filter:search | filter:inRange">
+
 				<div class="panel panel-danger">
 					<!-- Default panel contents -->
 					<div class="panel-heading">{{product.name}}</div>
@@ -64,7 +83,7 @@
 							<p>{{product.stock}}</p>
 							<p>{{product.category.name}}</p>
 							<div class='clearfix'>
-								<a href="#" class="btn btn-primary" role="button">Details</a>
+								<a href="#/producten/{{product.id}}" class="btn btn-primary" role="button">Details</a>
 								<a href="#" class="btn btn-success" role="button">Kopen</a>
 							</div>
 						</div>
