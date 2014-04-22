@@ -49,81 +49,90 @@
             <li><a href="#/producten/fietsen">Fietsen</a></li>
           </ul>
         </li>
-        <li class=""><a href="#" ng-click="showLogin = true">Login</a></li>
+        <li class=""><a href="#" data-toggle="collapse" data-target="#container-collapse">Login</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
-<div class="container">
+<div class="container panel-collapse collapse" id="container-collapse">
 	<div class="row">
         <div class="span12">
-    		<div class="" id="loginModal" ng-show="showLogin" class="animate-show">
+    		<div id="loginModal">
               <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" ng-click="showLogin = false">×</button>
+                <button type="button" class="close" data-dismiss="modal" data-toggle="collapse" data-target="#container-collapse">×</button>
                 <h3>Have an Account?</h3>
               </div>
               <div class="modal-body">
-                <div class="well">
-                  <ul class="nav nav-tabs">
-                    <li class="active"><a href="#login" data-toggle="tab">Login</a></li>
-                    <li><a href="#create" data-toggle="tab">Create Account</a></li>
-                  </ul>
-                  <div id="myTabContent" class="tab-content">
-                    <div class="tab-pane active in" id="login">
-                      <form class="form-horizontal" action='' method="POST">
-                        <fieldset>
-                          <div id="legend">
-                            <legend class="">Login</legend>
-                          </div>    
-                          <div class="control-group">
-                            <!-- Username -->
-                            <label class="control-label"  for="username">Username</label>
-                            <div class="controls">
-                              <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
-                            </div>
-                          </div>
-     
-                          <div class="control-group">
-                            <!-- Password-->
-                            <label class="control-label" for="password">Password</label>
-                            <div class="controls">
-                              <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
-                            </div>
-                          </div>
-     
-     
-                          <div class="control-group">
-                            <!-- Button -->
-                            <div class="controls">
-                              <button class="btn btn-success">Login</button>
-                            </div>
-                          </div>
-                        </fieldset>
-                      </form>                
-                    </div>
-                    <div class="tab-pane fade" id="create">
-                      <form id="tab">
-                        <label>Username</label>
-                        <input type="text" value="" class="input-xlarge">
-                        <label>First Name</label>
-                        <input type="text" value="" class="input-xlarge">
-                        <label>Last Name</label>
-                        <input type="text" value="" class="input-xlarge">
-                        <label>Email</label>
-                        <input type="text" value="" class="input-xlarge">
-                        <label>Address</label>
-                        <textarea value="Smith" rows="3" class="input-xlarge">
-                        </textarea>
-     
-                        <div>
-                          <button class="btn btn-primary">Create Account</button>
-                        </div>
-                      </form>
-                    </div>
-                </div>
-              </div>
-            </div>
+				<div class="well">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#login" data-toggle="tab">Login</a></li>
+						<li><a href="#create" data-toggle="tab">Create Account</a></li>
+					</ul>
+					<div id="myTabContent" class="tab-content">
+						<div class="tab-pane active in" id="login">
+							<form class="form-horizontal" ng-controller="FormLoginCtrl" ng-submit="submitLogin(form)">
+								<fieldset>
+									<div id="legend">
+										<legend class="">Login</legend>
+									</div>
+									<div class="control-group">
+										<!-- Username -->
+										<label class="control-label" for="email">Email</label>
+										<div class="controls">
+											<input type="text" id="email" name="email" placeholder="Email" class="input-xlarge" ng-model="form.email">
+										</div>
+									</div>
+
+									<div class="control-group">
+										<!-- Password-->
+										<label class="control-label" for="password">Password</label>
+										<div class="controls">
+											<input type="password" id="password" name="password" placeholder="Password" class="input-xlarge" ng-model="form.password">
+										</div>
+									</div>
+
+
+									<div class="control-group">
+										<!-- Button -->
+										<div class="controls">
+											<button class="btn btn-success" ng-click="submit">Login</button>
+										</div>
+									</div>
+								</fieldset>
+							</form>
+						</div>
+						<div class="tab-pane fade" id="create">
+							<form id="tab">
+								<label>Username</label>
+								<div class="controls">
+									<input type="text" value="" class="input-xlarge">
+								</div>
+								<label>First Name</label>
+								<div class="controls">
+									<input type="text" value="" class="input-xlarge">
+								</div>
+								<label>Last Name</label>
+								<div class="controls">
+									<input type="text" value="" class="input-xlarge">
+								</div>
+								<label>Email</label>
+								<div class="controls">
+									<input type="text" value="" class="input-xlarge">
+								</div>
+								<label>Address</label>
+								<div class="controls">
+									<textarea rows="3" class="input-xlarge"></textarea>
+								</div>
+
+								<div>
+									<button class="btn btn-primary">Create Account</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
         </div>
 	</div>
 	</div>
@@ -148,7 +157,6 @@
 	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
 	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 	<script src="bower_components/angular-route/angular-route.js"></script>
-	<script src="bower_components/angular-animate/angular-animate.js"></script>
 	<!-- endbower -->
 	<!-- endbuild -->
 
@@ -156,12 +164,13 @@
 	<script src="scripts/app.js"></script>
 	<script src="scripts/controllers/menu.js"></script>
 	<script src="scripts/controllers/main.js"></script>
-
+	<script src="scripts/controllers/form.js"></script>
 	<script src="scripts/controllers/product.js"></script>
 
 	<script src="scripts/services/services.js"></script>
 	<script src="scripts/services/categorieservice.js"></script>
 	<script src="scripts/services/productservice.js"></script>
+	<script src="scripts/services/clientservice.js"></script>
 	<script src="scripts/directives/slider.js"></script>
 	<!-- endbuild -->
 

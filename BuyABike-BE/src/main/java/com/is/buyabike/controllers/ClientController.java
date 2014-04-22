@@ -37,23 +37,31 @@ public class ClientController {
 		}
 	}
 	
-	@RequestMapping(value = "login", method = RequestMethod.POST, params = {"email", "password"})
+	@RequestMapping(method = RequestMethod.POST, params = {"email", "password"})
 	public @ResponseBody boolean login(ServletRequest request, @RequestParam("email") String email, @RequestParam("password") String password) {
 		HttpServletRequest req = (HttpServletRequest) request;
 		
 		Client client = service.loginClient(email, password);
 		if (client != null) {
 			req.getSession().setAttribute("client", client);
+			
+			System.out.println(client.getFirstName() + " " + client.getLastName() + " logged in!");
 			return true;
 		}
 		
 		return false;
 	}
 
-	@RequestMapping(value = "orders", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody List<Order> listOrders(ServletRequest request) {
-		HttpServletRequest req = (HttpServletRequest) request;
-		Client client = (Client) req.getSession().getAttribute("client");
-		return client.getOrders();
+		try {
+			HttpServletRequest req = (HttpServletRequest) request;
+			Client client = (Client) req.getSession().getAttribute("client");
+		
+			return client.getOrders();
+		}
+		catch (NullPointerException e) {
+			return null;
+		}
 	}
 }
