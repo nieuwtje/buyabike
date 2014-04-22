@@ -44,7 +44,7 @@
 						
 						
 							<label >Prijs van {{priceRange[0] | currency:"&euro; "}} tot {{priceRange[1] | currency:"&euro; "}}</label>
-							<div ui-slider="{range: true}" min="0" max="2500" step="0.10" use-decimals ng-model="priceRange"></div>
+							<div ui-slider="{range: true}" min="{{minPrice}}" max="{{maxPrice}}" step="0.10" use-decimals ng-model="priceRange"></div>
 						
 						</div>
 					</div>
