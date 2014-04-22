@@ -1,19 +1,23 @@
 <div class="container">
-	<div class="panel-heading">{{product.name}}</div>
-	<div class="panel-body flexcolumn">
-		<img src="/images/bikes/bike{{product.id}}.jpg"
-			alt="foto of {{product.name}}" class="productfoto-list">
-		<div>
-			<p>{{product.description}}</p>
-			<p>
-				<span>{{product.resellPrice | currency:"&euro; "}}</span>
-			</p>
-			<p>{{product.stock}}</p>
-			<p>{{product.category.name}}</p>
-			<div class='clearfix'>
-				<a href="#" class="btn btn-primary" role="button">Details</a> <a
-					href="#" class="btn btn-success" role="button">Kopen</a>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="">
+				<img src="/images/bikes/bike{{product.id}}.jpg"
+					alt="foto of {{product.name}}" class="productfoto-list">
+				<div>
+				<h4>Omschrijving</h4>
+					<p>{{product.description}}</p>			
+				</div>
 			</div>
+		</div>
+		<div class="coll-md-1"></div>
+		<div class="coll-md-2">
+		<h2>{{product.name}}</h2>
+		<p>Actuele voorraad: {{product.stock}} stuks</p>
+		<p>Leverancier: {{product.supplier.name}}</p>
+		<p>Prijs: 
+						<span>{{product.resellPrice | currency:"&euro; "}}</span>
+					</p>
 		</div>
 	</div>
 </div>
