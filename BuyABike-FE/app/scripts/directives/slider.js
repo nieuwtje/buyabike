@@ -1,4 +1,5 @@
 var sliderDirectives = angular.module('sliderDirectives', []);
+
 sliderDirectives.value('uiSliderConfig',{}).directive('uiSlider', ['uiSliderConfig', '$timeout', function(uiSliderConfig, $timeout) {
     uiSliderConfig = uiSliderConfig || {};
     return {
@@ -74,6 +75,7 @@ sliderDirectives.value('uiSliderConfig',{}).directive('uiSlider', ['uiSliderConf
                     ngModel.$setViewValue(ui.values || ui.value);
                     scope.$apply();
                 });
+                
 
                 // Update slider from model value
                 ngModel.$render = function() {
@@ -85,6 +87,7 @@ sliderDirectives.value('uiSliderConfig',{}).directive('uiSlider', ['uiSliderConf
 
                     // Do some sanity check of range values
                     if (options.range === true) {
+                    	
 
                         // Check outer bounds for min and max values
                         if (angular.isDefined(options.min) && options.min > ngModel.$viewValue[0]) {
