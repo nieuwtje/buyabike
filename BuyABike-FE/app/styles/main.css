@@ -124,12 +124,6 @@ img {
 /*****************/
 /* Animate login */
 /*****************/
-.animate-container {
-	height: 300px;
-	overflow: hidden;
-	background-color: red;
-}
-
 .animate-show {
 	opacity: 1;
 	-webkit-transition: all linear 0.5s;
