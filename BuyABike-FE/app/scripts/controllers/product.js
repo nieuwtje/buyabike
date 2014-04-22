@@ -24,7 +24,3 @@ productControllers.controller('ProductListCtrl', [
 				return pfff;
 			}
 		} ]);
-productControllers.controller('ProductDetailCtrl', [ '$scope', '$routeParams',
-		function($scope, $routeParams) {
-			$scope.productId = $routeParams.productId;
-		} ]);
