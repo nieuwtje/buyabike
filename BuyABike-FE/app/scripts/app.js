@@ -5,8 +5,7 @@ var buyabikefeapp = angular.module('buyAbikeFeApp',
 buyabikefeapp.config(
 		function($routeProvider) {
 			$routeProvider.when('/', {
-				templateUrl : 'views/main.html',
-				controller : 'MainCtrl'
+				redirectTo : '/producten'
 			}).when('/producten', {
 				templateUrl : 'views/product-list.html',
 				controller : 'ProductListCtrl'
