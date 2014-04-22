@@ -1,6 +1,6 @@
 'use strict';
 var buyabikefeapp = angular.module('buyAbikeFeApp',
-		[ 'ngCookies', 'ngResource', 'ngSanitize', 'ngRoute','mainControllers','menuControllers','productControllers','filterControllers', 'buyabikeServices' ]);
+		[ 'ngCookies', 'ngResource', 'ngSanitize', 'ngRoute','mainControllers','menuControllers','productControllers','filterControllers', 'buyabikeServices','sliderDirectives' ]);
 
 buyabikefeapp.config(
 		function($routeProvider) {
