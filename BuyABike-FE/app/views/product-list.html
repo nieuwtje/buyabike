@@ -68,6 +68,7 @@
 
 			<div class="col-sm-6 col-md-4"
 				ng-repeat="product in products | filter:filterBy | filter:search | filter:inRange">
+
 				<div class="panel panel-danger">
 					<!-- Default panel contents -->
 					<div class="panel-heading">{{product.name}}</div>
@@ -75,14 +76,14 @@
 						<img src="/images/bikes/bike{{product.id}}.jpg"
 							alt="foto of {{product.name}}" class="productfoto-list">
 						<div>
-							<p>{{product.description}}</p>
+							<p>{{product.description| limitTo:numLimit}}...</p>
 							<p>
 								<span>{{product.resellPrice | currency:"&euro; "}}</span>
 							</p>
 							<p>{{product.stock}}</p>
 							<p>{{product.category.name}}</p>
 							<div class='clearfix'>
-								<a href="#" class="btn btn-primary" role="button">Details</a>
+								<a href="#/producten/{{product.id}}" class="btn btn-primary" role="button">Details</a>
 								<a href="#" class="btn btn-success" role="button">Kopen</a>
 							</div>
 						</div>
