@@ -43,7 +43,7 @@
 						<div class="list-group">
 						
 						
-							<label >Prijs van {{priceRange[0] | currency:"&euro; "}} tot {{priceRange[1] | currency:"&euro; "}}</label>
+							<label >Prijs van {{testFilter(priceRange)}}</label>
 							<div ui-slider="{range: true}" min="{{minPrice}}" max="{{maxPrice}}" step="0.10" use-decimals ng-model="priceRange"></div>
 						
 						</div>

@@ -30,6 +30,20 @@ $scope.priceRange=[0,1500];
 	  }
 	  return true;
   }
+  
+  $scope.testFilter = function(range){
+	  var result = "van ";
+	  if($scope.minPrice >0 && $scope.minPrice === range[0]){
+		  result = result + " < ";
+	  }
+		  result = result + $filter('currency')(range[0], '\u20AC') + " tot ";
+	  
+		  if($scope.maxPrice === range[1]){
+			  result = result + " > ";
+		  }
+		  result = result + $filter('currency')(range[1], '\u20AC');
+	  return result;
+  }
 }]);
 
 productControllers.controller('ProductDetailCtrl', [ '$scope', '$routeParams','Product',
